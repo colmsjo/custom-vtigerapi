@@ -1,0 +1,1148 @@
+2015/05/15 12:11:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "site".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/
+---
+2015/05/15 12:13:58 [error] [exception.CException] exception 'CException' with message 'ApiController cannot find the requested view "index".' in /var/www/html/gizur/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#1 /var/www/html/gizur/api/protected/controllers/ApiController.php(71): CController->render('index')
+#2 /var/www/html/gizur/framework/web/actions/CInlineAction.php(49): ApiController->actionIndex()
+#3 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/html/gizur/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/gizur/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('')
+#7 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gizur/api/
+---
+2015/05/15 12:14:18 [error] [exception.CException] exception 'CException' with message 'ApiController cannot find the requested view "index".' in /var/www/html/gizur/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#1 /var/www/html/gizur/api/protected/controllers/ApiController.php(71): CController->render('index')
+#2 /var/www/html/gizur/framework/web/actions/CInlineAction.php(49): ApiController->actionIndex()
+#3 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/html/gizur/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/gizur/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('')
+#7 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gizur/api/
+---
+2015/05/15 12:15:10 [error] [php] Object of class CInlineAction could not be converted to string (/var/www/html/gizur/api/protected/controllers/ApiController.php:28)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (28)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 12:15:22 [error] [php] Object of class CInlineAction could not be converted to string (/var/www/html/gizur/api/protected/controllers/ApiController.php:28)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (28)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 12:15:24 [error] [php] Object of class CInlineAction could not be converted to string (/var/www/html/gizur/api/protected/controllers/ApiController.php:28)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (28)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 12:15:29 [error] [exception.CException] exception 'CException' with message 'ApiController cannot find the requested view "index".' in /var/www/html/gizur/framework/web/CController.php:878
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#1 /var/www/html/gizur/api/protected/controllers/ApiController.php(72): CController->render('index')
+#2 /var/www/html/gizur/framework/web/actions/CInlineAction.php(49): ApiController->actionIndex()
+#3 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/html/gizur/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /var/www/html/gizur/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('')
+#7 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/gizur/api/
+---
+2015/05/15 12:23:53 [error] [php] Undefined variable: e (/var/www/html/gizur/api/protected/controllers/ApiController.php:54)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (54)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 12:24:28 [error] [php] Undefined variable: e (/var/www/html/gizur/api/protected/controllers/ApiController.php:54)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (54)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 12:25:02 [error] [exception.CException] exception 'CException' with message 'Property "ApiController._codes" is not defined.' in /var/www/html/gizur/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/gizur/api/protected/controllers/ApiController.php(194): CComponent->__get('_codes')
+#1 /var/www/html/gizur/api/protected/controllers/ApiController.php(58): ApiController->_sendResponse(403, '{"success":fals...')
+#2 /var/www/html/gizur/framework/web/CController.php(306): ApiController->beforeAction(Object(CInlineAction))
+#3 /var/www/html/gizur/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/html/gizur/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('')
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#7 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#8 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/gizur/api/
+---
+2015/05/15 12:46:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+---
+2015/05/15 12:47:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+---
+2015/05/15 12:48:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+---
+2015/05/15 12:49:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+---
+2015/05/15 12:53:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+---
+2015/05/15 12:56:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/15 13:02:51 [error] [php] include(RESTClient.php): failed to open stream: No such file or directory (/var/www/html/gizur/framework/YiiBase.php:432)
+Stack trace:
+#0 /var/www/html/gizur/api/protected/controllers/ApiController.php(84): spl_autoload_call()
+#1 /var/www/html/gizur/framework/web/actions/CInlineAction.php(49): ApiController->actionLogin()
+#2 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams()
+#3 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#4 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#5 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#7 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#8 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (84)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 13:05:17 [error] [exception.CException] exception 'CException' with message 'Property "ApiController._vtresturl" is not defined.' in /var/www/html/gizur/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/gizur/api/protected/controllers/ApiController.php(91): CComponent->__get('_vtresturl')
+#1 /var/www/html/gizur/framework/web/actions/CInlineAction.php(49): ApiController->actionLogin()
+#2 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/html/gizur/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/html/gizur/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('login')
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/login')
+#7 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#8 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/15 13:45:31 [error] [exception.CException] exception 'CException' with message 'Property "ApiController._vtresturl" is not defined.' in /var/www/html/gizur/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/gizur/api/protected/controllers/ApiController.php(91): CComponent->__get('_vtresturl')
+#1 /var/www/html/gizur/framework/web/actions/CInlineAction.php(49): ApiController->actionLogin()
+#2 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/html/gizur/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/html/gizur/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('login')
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/login')
+#7 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#8 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/15 13:45:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/15 13:45:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/15 13:45:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/15 13:46:57 [error] [exception.CException] exception 'CException' with message 'Property "ApiController._vtresturl" is not defined.' in /var/www/html/gizur/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/gizur/api/protected/controllers/ApiController.php(90): CComponent->__get('_vtresturl')
+#1 /var/www/html/gizur/framework/web/actions/CInlineAction.php(49): ApiController->actionLogin()
+#2 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#3 /var/www/html/gizur/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#4 /var/www/html/gizur/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('login')
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/login')
+#7 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#8 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/15 14:34:41 [error] [php] Undefined variable: username (/var/www/html/gizur/api/protected/components/UserDetail.php:47)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#2 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/protected/components/UserDetail.php (47)
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (121)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 14:50:08 [error] [php] Creating default object from empty value (/var/www/html/gizur/api/protected/controllers/ApiController.php:125)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (125)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/15 15:02:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/15 15:02:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/0/50/all/2015/05/0/all/open".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/0/50/a...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/0/50/all/2015/05/0/all/open
+---
+2015/05/15 15:08:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/15 15:10:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/15 15:31:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/16 12:09:16 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:09:46 [error] [php] Undefined property: stdClass::$result (/var/www/html/gizur/api/protected/controllers/ApiController.php:139)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (139)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:10:40 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:11:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:11:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:11:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:11:36 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:12:12 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:20:47 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:21:17 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/index.phpAuthenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:21:29 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:26:09 [error] [php] Undefined property: stdClass::$result (/var/www/html/gizur/api/protected/controllers/ApiController.php:139)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (139)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:26:59 [error] [php] Undefined property: stdClass::$result (/var/www/html/gizur/api/protected/controllers/ApiController.php:140)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (140)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:27:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+---
+2015/05/16 12:27:12 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/index.php/Authenticate/login
+---
+2015/05/16 12:27:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Authenticate/login".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Authenticate/lo...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:27:50 [error] [php] Undefined property: stdClass::$result (/var/www/html/gizur/api/protected/controllers/ApiController.php:140)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (140)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:37:31 [error] [exception.CException] exception 'CException' with message 'Object configuration must be an array containing a "class" element.' in /var/www/html/gizur/framework/YiiBase.php:193
+Stack trace:
+#0 /var/www/html/gizur/framework/base/CModule.php(393): YiiBase::createComponent(Array)
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(216): CModule->getComponent('cache')
+#2 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#3 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#4 /var/www/html/gizur/framework/base/CApplication.php(530): CModule->getComponent('urlManager')
+#5 /var/www/html/gizur/framework/web/CWebApplication.php(140): CApplication->getUrlManager()
+#6 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#7 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:38:12 [error] [php] MemcachePool::get(): Server localhost (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:38:26 [error] [php] MemcachePool::get(): Server localhost (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:40:07 [error] [php] MemcachePool::get(): Server localhost (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:40:08 [error] [php] MemcachePool::get(): Server localhost (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:40:58 [error] [php] MemcachePool::get(): Server localhost (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:40:59 [error] [php] MemcachePool::get(): Server localhost (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:41:00 [error] [php] MemcachePool::get(): Server localhost (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 12:43:14 [error] [exception.CException] exception 'CException' with message 'Alias "yii.caching" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/gizur/framework/YiiBase.php:295
+Stack trace:
+#0 /var/www/html/gizur/framework/YiiBase.php(196): YiiBase::import('yii\caching\Mem...', true)
+#1 /var/www/html/gizur/framework/base/CModule.php(393): YiiBase::createComponent(Array)
+#2 /var/www/html/gizur/framework/web/CUrlManager.php(216): CModule->getComponent('cache')
+#3 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#4 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#5 /var/www/html/gizur/framework/base/CApplication.php(530): CModule->getComponent('urlManager')
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(140): CApplication->getUrlManager()
+#7 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#8 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:44:08 [error] [exception.CException] exception 'CException' with message 'Alias "framework.caching" is invalid. Make sure it points to an existing directory or file.' in /var/www/html/gizur/framework/YiiBase.php:295
+Stack trace:
+#0 /var/www/html/gizur/framework/YiiBase.php(196): YiiBase::import('framework\cachi...', true)
+#1 /var/www/html/gizur/framework/base/CModule.php(393): YiiBase::createComponent(Array)
+#2 /var/www/html/gizur/framework/web/CUrlManager.php(216): CModule->getComponent('cache')
+#3 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#4 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#5 /var/www/html/gizur/framework/base/CApplication.php(530): CModule->getComponent('urlManager')
+#6 /var/www/html/gizur/framework/web/CWebApplication.php(140): CApplication->getUrlManager()
+#7 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#8 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#9 {main}
+REQUEST_URI=/gizur/api/Authenticate/login
+---
+2015/05/16 12:58:21 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 13:58:35 [error] [php] Undefined property: stdClass::$result (/var/www/html/gizur/api/protected/controllers/ApiController.php:153)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (153)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/16 14:00:22 [error] [php] Undefined property: stdClass::$result (/var/www/html/gizur/api/protected/controllers/ApiController.php:154)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (154)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/17 14:18:31 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/17 14:19:51 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: No route to host (113) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/17 14:20:15 [error] [php] MemcachePool::get(): Server 172.17.0.2 (tcp 11211, udp 0) failed with: Connection refused (111) (/var/www/html/gizur/framework/caching/CMemCache.php:149)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CUrlManager.php(219): CMemCache->get()
+#1 /var/www/html/gizur/framework/web/CUrlManager.php(206): CUrlManager->processRules()
+#2 /var/www/html/gizur/framework/base/CModule.php(394): CUrlManager->init()
+#3 /var/www/html/gizur/framework/base/CApplication.php(530): CWebApplication->getComponent()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(140): CWebApplication->getUrlManager()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/login
+in /var/www/html/gizur/api/index.php (13)
+2015/05/17 14:21:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:24:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:25:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:26:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:27:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:27:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:27:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:28:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:28:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:29:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:29:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:29:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:29:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:30:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:30:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:30:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "Assets".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('Assets')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:31:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:31:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:31:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/Assets
+---
+2015/05/17 14:35:25 [error] [php] array_search() expects parameter 2 to be array, null given (/var/www/html/gizur/api/protected/controllers/ApiController.php:244)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#2 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Assets
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (244)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/17 14:35:38 [error] [php] array_search() expects parameter 2 to be array, null given (/var/www/html/gizur/api/protected/controllers/ApiController.php:244)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#2 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Assets
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (244)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/17 14:38:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 14:38:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 14:42:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 14:52:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:23:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:23:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:24:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:24:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "HelpDesk/damagestatus".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('HelpDesk/damage...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:25:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:25:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:26:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:26:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "list".' in /var/www/html/gizur/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(270): CController->missingAction('list')
+#1 /var/www/html/gizur/framework/web/CWebApplication.php(282): CController->run('list')
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('api/list')
+#3 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#4 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/gizur/api/HelpDesk/damagestatus
+---
+2015/05/17 15:31:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19935".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19935
+---
+2015/05/17 15:31:24 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19935".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19935
+---
+2015/05/17 15:31:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19935".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19935
+---
+2015/05/17 15:34:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19935".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19935
+---
+2015/05/17 15:34:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19935".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19935
+---
+2015/05/17 15:46:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19935".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19935
+---
+2015/05/17 15:46:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19935".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19935
+---
+2015/05/17 16:00:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19319".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19319
+---
+2015/05/17 16:00:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19319".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19319
+---
+2015/05/17 16:00:25 [error] [php] Undefined index: result (/var/www/html/gizur/api/protected/components/Damages.php:131)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#2 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/HelpDesk/19318
+in /var/www/html/gizur/api/protected/components/Damages.php (131)
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (291)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/17 16:03:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19319".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19319
+---
+2015/05/17 16:03:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "DocumentAttachments/17x19319".' in /var/www/html/gizur/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController('DocumentAttachm...')
+#1 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /var/www/html/gizur/api/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/gizur/api/DocumentAttachments/17x19319
+---
+2015/05/18 10:16:27 [error] [php] Undefined index: HTTP_ACCEPT_LANGUAGE (/var/www/html/gizur/api/protected/components/ValidateRequest.php:63)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#1 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#2 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#5 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/changepw
+in /var/www/html/gizur/api/protected/components/ValidateRequest.php (63)
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (68)
+in /var/www/html/gizur/api/index.php (13)
+2015/05/18 10:17:31 [error] [php] Object of class stdClass could not be converted to string (/var/www/html/gizur/api/protected/controllers/ApiController.php:400)
+Stack trace:
+#0 /var/www/html/gizur/framework/web/CController.php(308): CInlineAction->runWithParams()
+#1 /var/www/html/gizur/framework/web/CController.php(286): ApiController->runAction()
+#2 /var/www/html/gizur/framework/web/CController.php(265): ApiController->runActionWithFilters()
+#3 /var/www/html/gizur/framework/web/CWebApplication.php(282): ApiController->run()
+#4 /var/www/html/gizur/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#5 /var/www/html/gizur/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#6 /var/www/html/gizur/api/index.php(13): CWebApplication->run()
+REQUEST_URI=/gizur/api/Authenticate/changepw
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (400)
+in /var/www/html/gizur/api/protected/controllers/ApiController.php (342)
+in /var/www/html/gizur/api/index.php (13)
