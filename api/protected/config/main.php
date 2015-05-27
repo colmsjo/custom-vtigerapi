@@ -38,11 +38,28 @@ return array(
             'urlFormat' => 'path',
             'rules' => array(
                 array('api/login', 'pattern' => '/<model:(Authenticate)>/<action:(login|logout)>', 'verb' => 'POST'),
+                array('api/logout', 'pattern' => '/<model:(Authenticate)>/<action:(logout)>', 'verb' => 'POST'),
                 array('api/Assets', 'pattern' => '/<model:(Assets)>', 'verb' => 'GET'),
+                array('api/ViewCategoryAssets', 'pattern' => '/<model:(Assets)>/<category:(inoperation|damaged)>', 'verb' => 'GET'),
+                array('api/ViewAssets', 'pattern' => '/<model:(Assets)>/<id:[0-9x]+>', 'verb' => 'GET'),
+                array('api/Assets', 'pattern' => '/<model:(Assets)>/<actionType:\w+>/<filter:\w+>', 'verb' => 'GET'),
+                array('api/Pickuplist', 'pattern' => '/<model:(Assets)>/<fieldname:\w+>', 'verb' => 'GET'),
+                array('api/CreateAssets', 'pattern' => '/<model:(Assets)>', 'verb' => 'POST'),
+                array('api/UpdateAssets', 'pattern' => '/<model:(Assets)>/<id:[0-9x]+>/<action:\w+>', 'verb' => 'PUT'),
+                array('api/Products', 'pattern' => '/<model:(Products)>', 'verb' => 'GET'),
+                array('api/Users', 'pattern' => '/<model:(Users)>', 'verb' => 'GET'),
+                array('api/Contacts', 'pattern' => '/<model:(Contacts)>', 'verb' => 'GET'),
+                array('api/Contacts', 'pattern' => '/<model:(Contacts)>/<actionType:\w+>/<filter:\w+>', 'verb' => 'GET'),
+                array('api/Accounts', 'pattern' => '/<model:(Accounts)>', 'verb' => 'GET'),
+                array('api/ViewCategoryHelpdesk', 'pattern' => '/<model:(HelpDesk)>/<category:(inoperation|damaged|all)>', 'verb' => 'GET'),
+                array('api/ViewCategoryHelpdesk', 'pattern' => '/<model:(HelpDesk)>/<minLimit:\w+>/<maxLimit:\w+>/<category:(inoperation|damaged|all)>/<year:\d{4}>/<month:\d{2}>/<trailerid:\w+>/<reportdamage:(yes|no|all)>/<ticketstatus:\w+>', 'verb' => 'GET'),
+                array('api/ViewHelpdesk', 'pattern' => '/<model:(HelpDesk)>/<id:[0-9x]+>', 'verb' => 'GET'),
                 array('api/DamageStatus', 'pattern' => '/<model:(HelpDesk)>/<fieldname:\w+>', 'verb' => 'GET'),
                 array('api/DamageUpdateStatus', 'pattern' => '/<model:(HelpDesk)>/<id:[0-9x]+>', 'verb' => 'PUT'),
                 array('api/DamageUpdateStatusAndNotes', 'pattern' => '/<model:(HelpDesk)>/<action:(updatedamagenotes)>/<id:[0-9x]+>', 'verb' => 'PUT'),
+                array('api/CreateTicket', 'pattern' => '/<model:(HelpDesk)>', 'verb' => 'POST'),
                 array('api/UpdatePassword', 'pattern' => '/<model:(Authenticate)>/<action:(reset|changepw)>', 'verb' => 'PUT'),
+                
             ),
         ),
         'cache' => array(
@@ -82,7 +99,7 @@ return array(
     'params' => array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
-        'vtRestUrl' => 'https://clabvtigerdev.gizur.com/vtigercrm/webservice.php',
+        'vtRestUrl' => 'http://172.17.0.3/vtigercrm/webservice.php',
         'clab_custom_fields' => Array(
             'HelpDesk' => Array(
                 'tickettype' => 'cf_649',

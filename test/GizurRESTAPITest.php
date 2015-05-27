@@ -27,9 +27,9 @@
  */
 
 require_once realpath(__DIR__ . '/config.inc.php');
-require_once 'PHPUnit/Autoload.php';
+//require_once 'PHPUnit/Autoload.php';
 require_once realpath(__DIR__ . '/lib/RESTClient.php');
-require_once realpath(__DIR__ . '/../lib/aws-php-sdk/sdk.class.php');
+//require_once realpath(__DIR__ . '/../lib/aws-php-sdk/sdk.class.php');
 
 /**
  * Gizur Test inherist PHP Unit Tests Framework
@@ -55,7 +55,7 @@ class Girur_REST_API_Test extends PHPUnit_Framework_TestCase
     private $_credentials = Array();
 
     private $_url = <<<URL
-"http://phpapplications-env-sixmtjkbzs.elasticbeanstalk.com/api/"
+"http://localhost/gizur/api/"
 URL;
 
     /**
@@ -112,14 +112,16 @@ URL;
     
     private function _setHeader($username, $password, $params, $signature)
     {
-        $this->_rest->set_header('X_USERNAME', $username);
-        $this->_rest->set_header('X_PASSWORD', $password);
-        $this->_rest->set_header('X_TIMESTAMP', $params['Timestamp']);
-        $this->_rest->set_header('X_SIGNATURE', $signature);                   
+	$this->_rest->set_header('X-USERNAME', $username);
+        $this->_rest->set_header('X-PASSWORD', $password);
+        $this->_rest->set_header('X-TIMESTAMP', $params['Timestamp']);
+        $this->_rest->set_header('X-SIGNATURE', $signature);     
+	$this->_rest->set_header('X-CLIENTID', 'clab');   
+	$this->_rest->set_header('ACCEPT-LANGUAGE', 'en');           
         $this->_rest->set_header(
-            'X_GIZURCLOUD_API_KEY', $this->_gizurCloudApiKey
+            'X-GIZURCLOUD_API-KEY', $this->_gizurCloudApiKey
         );
-        $this->_rest->set_header('X_UNIQUE_SALT', $params['UniqueSalt']);
+        $this->_rest->set_header('X-UNIQUE-SALT', $params['UniqueSalt']);
     }
     
     /**
@@ -142,7 +144,7 @@ URL;
         $this->_gizurcloudSecretKey = $configuration['GIZURCLOUD_SECRET_KEY'];
         $this->_apiVersion = $configuration['API_VERSION'];
         $this->_credentials = $configuration['credentials'];
-        
+	
     }
     
     /**
@@ -164,22 +166,21 @@ URL;
     
     public function testLoginStress()
     {
-        //Request parameters
+	//Request parameters
         $model = 'Authenticate';
         $action = 'login';
         $method = 'POST';
         $delta = 0;
-        $times = 100;
+        $times = 2;
         
-        $this->markTestSkipped('');
+       // $this->markTestSkipped('');
 
         echo "Authenticating Login " . PHP_EOL;        
         ob_flush();
-        
-        for($i=0;$i<$times;$i++)
+	$this->_credentials=array('niclas.andersson@coop.se'=>"123456");
+	for($i=0;$i<$times;$i++)
         //login using each credentials
         foreach ($this->_credentials as $username => $password) {
-            
             //Create REST handle
             $this->setUp();            
 
@@ -192,6 +193,8 @@ URL;
             //Set Header
             $this->_setHeader($username, $password, $params, $signature);  
             
+
+		//echo $this->_url.$model."/".$action;die;
             echo PHP_EOL . " Attempt No: $i Response: " . 
                 $response = $this->_rest->post(
                     $this->_url.$model."/".$action
@@ -207,7 +210,6 @@ URL;
                     echo PHP_EOL . " Delta Used " . $delta;
                 }
             }
-
             //check if response is valid
             if (isset($response->success)) {
                 //echo json_encode($response) . PHP_EOL;
@@ -220,6 +222,7 @@ URL;
             ob_flush();
         }
         echo PHP_EOL . PHP_EOL;
+	
     }
 
     /**
@@ -230,6 +233,7 @@ URL;
     
     public function testLoginSingle()
     {
+	//die('hi');
         //Request parameters
         $model = 'Authenticate';
         $action = 'login';
@@ -360,76 +364,7 @@ URL;
         echo PHP_EOL . PHP_EOL;
     }
 
-    /**
-     * Tests cron fucntionality for
-     * 1) Mailscan
-     * 
-     * @return void
-     */     
     
-    public function testCron()
-    {
-        //Request parameters
-        $model = 'Cron';
-        $action = 'dbbackup';
-        $method = 'PUT';
-           
-        echo " Executing Cron Mailscan " . PHP_EOL;        
-
-        // Generate signature
-        list($params, $signature) = $this->_generateSignature(
-            $method, $model, date("c"), 
-            uniqid()
-        );
-        
-        //Set Header
-        $this->_setHeader('', '', $params, $signature);
-        
-        echo PHP_EOL . " Response:  " . $response = $this->_rest->put(
-            $this->_url.$model."/".$action
-        );
-        
-        echo PHP_EOL . PHP_EOL;
-    }
-
-    /**
-     * Tests to fetch the About page
-     * 
-     * @return void
-     */     
-    
-    public function testAbout()
-    {
-        //Request parameters
-        $model = 'About';
-        $method = 'GET';
-        
-        echo " Fetching About " . PHP_EOL;        
-
-        // Generate signature
-        
-        list($params, $signature) = $this->_generateSignature(
-            $method, $model, date("c"), 
-            uniqid()
-        );
-        
-        
-        //$this->_rest->set_header('X_USERNAME', $username);
-        //$this->_rest->set_header('X_PASSWORD', $password);
-        //$this->_rest->set_header('X_TIMESTAMP', $params['Timestamp']);
-        //$this->_rest->set_header('X_SIGNATURE', $signature);
-        //$this->_rest->set_header(
-        //'X_GIZURCLOUD_API_KEY', $this->gizurCloudApiKey
-        //);
-        $this->_rest->set_header('X_UNIQUE_SALT', $params['UniqueSalt']);
-        $this->_rest->format('json');  
-        echo PHP_EOL . " Response:  " . $response = $this->_rest->get(
-            $this->_url.$model
-        );
-        
-        echo PHP_EOL . PHP_EOL;
-    }
-
     /**
      * Tests the Change password
      * 

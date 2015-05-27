@@ -6,12 +6,12 @@ class configuration
     public function get()
     {
         return array(
-            'url' => 'http://gizur-env.elasticbeanstalk.com/api/',
+            'url' => 'http://localhost/gizur/api/',
             'GIZURCLOUD_API_KEY' => 'GZCLD51A309109FD3551A309109FE26',
             'GIZURCLOUD_SECRET_KEY' => "51a309109fca42.1554128151a309109fcb20.84498075",
             'API_VERSION' => '0.1',
             'credentials' => array(
-                'portal_user@gizur.com' => "2hxrftmd",
+                'niclas.andersson@coop.se' => "nicand",
                 //'mobile_user@gizur.com' => 'ivry34aq',
             ),
             'clientid' => 'clab'

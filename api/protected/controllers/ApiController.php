@@ -99,6 +99,7 @@ class ApiController extends Controller {
                         $this->_vtresturl . "?operation=logincustomer", "username=" . $_SERVER['HTTP_X_USERNAME'] .
                         "&password=" . $_SERVER['HTTP_X_PASSWORD']
                 );
+                //print_r($response);die;
                 $this->_vtresponse = $response;
 
                 if ($response == '' || $response == null)
@@ -218,6 +219,41 @@ class ApiController extends Controller {
         }
     }
 
+    public function actionPickuplist() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+
+            $assets = new Assets;
+            $response = $assets->pickuplist($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $content = json_encode(
+                    array(
+                        'success' => true,
+                        'result' =>
+                        $response
+                    )
+            );
+            ob_start();
+            $this->_sendResponse(200, $content);
+            ob_flush();
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
     public function actionAssets() {
         try {
             $cacheresponse = $this->getlogincache();
@@ -229,6 +265,152 @@ class ApiController extends Controller {
 
             $assets = new Assets;
             $response = $assets->assetslist($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $cachedValue = json_encode($response);
+            $cachekey = $this->_clientid . '_' .
+                    $_GET['model'] .
+                    '_' .
+                    'list';
+            Yii::app()->cache->set($cachekey, $cachedValue, 86000);
+            ob_start();
+            $this->_sendResponse(200, $cachedValue);
+            ob_flush();
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionCreateAssets() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+
+            $assets = new Assets;
+            $response = $assets->create($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse->result->vtigerUserId);
+            ob_start();
+            $this->_sendResponse(200, json_encode($response));
+            ob_flush();
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionUpdateAssets() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+
+            $assets = new Assets;
+            $response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse->result->vtigerUserId);
+            ob_start();
+            $this->_sendResponse(200, json_encode($response));
+            ob_flush();
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionViewAssets() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+
+            $assets = new Assets;
+            $response = $assets->view($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            ob_start();
+            $this->_sendResponse(200, json_encode($response));
+            ob_flush();
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionViewCategoryAssets() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+
+            $assets = new Assets;
+            $response = $assets->categorypickuplist($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            ob_start();
+            $this->_sendResponse(200, json_encode($response));
+            ob_flush();
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionProducts() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+
+            $assets = new Assets;
+            $response = $assets->productList($cacheresponse->sessionName, $this->_vtresturl);
             $cachedValue = json_encode($response);
             $cachekey = $this->_clientid . '_' .
                     $_GET['model'] .
@@ -338,9 +520,166 @@ class ApiController extends Controller {
                 "Not a Valid Request."
                 );
             $usr = new UserDetail;
-            $response=$usr->UpdatePassword($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
-            print_r($response);die;
-            $this->_sendResponse(200, $response);
+            $response = $usr->UpdatePassword($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionUsers() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $usr = new UserDetail;
+            $response = $usr->userlist($cacheresponse->sessionName, $this->_vtresturl);
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionAccounts() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $usr = new UserDetail;
+            $response = $usr->Accountlist($cacheresponse->sessionName, $this->_vtresturl);
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionContacts() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $contact = new Contacts;
+            $response = $contact->Contactlist($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $cacheKey = json_encode(
+                    array(
+                        'clientid' => $this->_clientid,
+                        'username' => $_SERVER['HTTP_X_USERNAME'],
+                        'password' => $_SERVER['HTTP_X_PASSWORD']
+                    )
+            );
+            Yii::app()->cache->delete($cacheKey);
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionViewCategoryHelpdesk() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $helpdesk = new Helpdesk;
+            $response = $helpdesk->categoryhelpdesklist($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionViewHelpdesk() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $helpdesk = new Helpdesk;
+            $response = $helpdesk->view($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
+    public function actionCreateTicket() {
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $helpdesk = new Helpdesk;
+            $response = $helpdesk->add($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
             $response = new stdClass();
             $response->success = false;
@@ -366,8 +705,43 @@ class ApiController extends Controller {
      * Logs out the current user and redirect to homepage.
      */
     public function actionLogout() {
-        Yii::app()->user->logout();
-        $this->redirect(Yii::app()->homeUrl);
+        try {
+            //Logout using {$this->_session->sessionName}
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $rest = new RESTClient();
+            $rest->format('json');
+            $response = $rest->get(
+                    $this->_vtresturl .
+                    "?operation=logout&sessionName=" .
+                    "{$cacheresponse->sessionName}"
+            );
+            //Objectify the response and check its success
+            $response = json_decode($response);
+
+            if ($response->success == false)
+                throw new Exception("Unable to Logout");
+
+            //send response to client
+            $response = new stdClass();
+            $response->success = true;
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
     }
 
     /**

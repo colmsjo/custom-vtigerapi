@@ -161,18 +161,13 @@ class UserDetail extends CApplicationComponent {
             $rest->format('json');
             $response = $rest->post(
                     $vtresturl, array(
-                    'sessionName' => $sessionName,
-                    'operation' => 'changepw',
-                    'username' => $_SERVER['HTTP_X_USERNAME'],
-                    'oldpassword' => $_SERVER['HTTP_X_PASSWORD'],
-                    'newpassword' => $_PUT['newpassword']
+                'sessionName' => $sessionName,
+                'operation' => 'changepw',
+                'username' => $_SERVER['HTTP_X_USERNAME'],
+                'oldpassword' => $_SERVER['HTTP_X_PASSWORD'],
+                'newpassword' => $_PUT['newpassword']
                     )
             );
-            //echo '<pre>';
-            echo $_SERVER['HTTP_X_USERNAME'];
-            echo  $_SERVER['HTTP_X_PASSWORD'];
-            echo $_PUT['newpassword'];
-            print_r($response);die;
             $response = json_decode($response);
             if ($response->success == false)
                 throw new Exception($response->error->message);
@@ -180,5 +175,69 @@ class UserDetail extends CApplicationComponent {
             return $response;
         }
     }
+
+    public function userlist($sessionName, $vtresturl) {
+        $query = "select * from " . $_GET['model'] . ";";
+        $queryParam = urlencode($query);
+
+        //creating query string
+        $params = "sessionName={$sessionName}" .
+                "&operation=query&query=$queryParam";
+
+        $rest = new RESTClient();
+        $rest->format('json');
+        $response = $rest->get(
+                $vtresturl . "?$params"
+        );
+
+        if ($response == '' || $response == null)
+            throw new Exception(
+            "Blank response received from " .
+            "vtiger: Get Products List"
+            );
+
+        //Objectify the response and check its success
+        $response = json_decode($response, true);
+
+        if ($response['success'] == false)
+            throw new Exception('Unable to fetch details');
+
+
+        return $response;
+    }
+
+    public function Accountlist($sessionName, $vtresturl) {
+        $query = "select * from " . $_GET['model'] . ";";
+        $queryParam = urlencode($query);
+
+        //creating query string
+        $params = "sessionName={$sessionName}" .
+                "&operation=query&query=$queryParam";
+
+        $rest = new RESTClient();
+        $rest->format('json');
+        $response = $rest->get(
+                $vtresturl . "?$params"
+        );
+        print_r($response);die;
+        if ($response == '' || $response == null)
+            throw new Exception(
+            "Blank response received from " .
+            "vtiger: Get Accounts List"
+            );
+
+        //Objectify the response and check its success
+        $response = json_decode($response, true);
+
+        if ($response['success'] == false)
+            throw new Exception('Unable to fetch details');
+
+        //Before sending response santise custom fields names to 
+        //human readable field names                
+
+        return $response;
+    }
+
+    
 
 }
