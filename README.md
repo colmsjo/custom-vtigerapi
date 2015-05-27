@@ -23,4 +23,40 @@ Send request using curl
     curl -X GET http://localhost/gizur/api/Assets 
     -H "Content-Type:application/json" -H "X-USERNAME:niclas.andersson@coop.se" 
     -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+
+  3. For trailer app portal: to get all damages we not use custom and vtiger api, For same we use direct mysql connection. 
+
+
+  4. For Assets tab
+    curl -X GET http://localhost/gizur/api/Assets/Search/s?searchString='' 
+    -H "Content-Type:application/json" -H "X-USERNAME:niclas.andersson@coop.se" 
+    -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
     
+ 5. Get All Account
+    curl -X GET http://localhost/gizur/api/Accounts 
+    -H "Content-Type:application/json" -H "X-USERNAME:niclas.andersson@coop.se" 
+    -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+
+ 6. Get All Products
+    curl -X GET http://localhost/gizur/api/Products 
+    -H "Content-Type:application/json" -H "X-USERNAME:niclas.andersson@coop.se" 
+    -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+
+ 7. Get Pick list
+    curl -X GET http://localhost/gizur/api/Assets/trailertype 
+    -H "Content-Type:application/json" -H "X-USERNAME:niclas.andersson@coop.se" 
+    -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+
+ 8. Get All Products
+    curl -X GET http://localhost/gizur/api/Assets/trailertype 
+    -H "Content-Type:application/json" -H "X-USERNAME:niclas.andersson@coop.se" 
+    -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+
+ 9. Create new Assets
+    curl -X POST http://localhost/gizur/api/Assets
+    -H "Content-Type:application/json" -H "X-USERNAME:niclas.andersson@coop.se" 
+    -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json" 
+    -D data
+
+
+
