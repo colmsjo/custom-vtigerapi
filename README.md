@@ -14,6 +14,19 @@ Update main.config
  * Change mem cache server detail
  * Change Vtiger api path
  * Change Post fix Server Configuration
+
+For Docker
+-----------------
+ * docker build --rm -t api . Add the flag --no-cache=true if you want to be 100% sure to build from scratch.
+ * Start api container:
+
+docker run -t -i -p 8080:80 --env-file=env.list --restart="on-failure:10" \
+--link vtiger:vtiger \
+--link beservices:beservices -h api --name api api \
+/bin/bash -c "supervisord; export > /env; bash"
+
+ * Disconnect with ctrl-p ctrl-q.
+ * The logs are available in logstash in the beservices container.
  
 Send request using curl
 -------------------------

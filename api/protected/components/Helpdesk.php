@@ -429,8 +429,8 @@ class Helpdesk extends CApplicationComponent {
         return $response;
     }
 
-    public function add($sessionName, $vtresturl, $clientid) {
-
+    public function add($sessionName, $vtresturl, $clientid, $session) {
+        
 
         /**
          * Validations
@@ -467,18 +467,22 @@ class Helpdesk extends CApplicationComponent {
                 $post[$keyToReplace] = $v;
             }
         }
-
+        
+        print_r($session);die;
         //get data json 
         $dataJson = json_encode(
                 array_merge(
                         $post, array(
-            'parent_id' => $this->_session->contactId,
-            'assigned_user_id' => $this->_session->userId,
+            'parent_id' => $session->contactId,
+            'assigned_user_id' => $session->result->vtiger_user_id,
             'ticketstatus' => (isset($post['ticketstatus']) && !empty($post['ticketstatus'])) ? $post['ticketstatus'] : 'Closed',
                         )
                 )
         );
-
+        throw new Exception(
+            $dataJson, 1002
+            );
+        echo $dataJson;die;
         //Receive response from vtiger REST service
         //Return response to client  
         $rest = new RESTClient();
@@ -517,6 +521,7 @@ class Helpdesk extends CApplicationComponent {
         $response->message = "Processing the request, you will be notified by mail on successfull completion";
         $response->result = $globalresponse->result;
 
+        print_r($response);die;
         echo json_encode($response);
 
         // get the size of the output

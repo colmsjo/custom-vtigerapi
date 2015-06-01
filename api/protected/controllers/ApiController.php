@@ -61,7 +61,6 @@ class ApiController extends Controller {
     );
 
     protected function beforeAction($action) {
-//echo $action;
         try {
             $this->_traceId = uniqid();
             $req = new ValidateRequest;
@@ -140,6 +139,7 @@ class ApiController extends Controller {
                  */
                 $session = new stdClass();
                 $session->sessionName = $session_name;
+                $session->contactId = $contactId;
                 $session->username = $username;
                 $session->result = $response;
                 $this->setlogincache(json_encode($session));
@@ -596,14 +596,7 @@ class ApiController extends Controller {
                 );
             $contact = new Contacts;
             $response = $contact->Contactlist($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
-            $cacheKey = json_encode(
-                    array(
-                        'clientid' => $this->_clientid,
-                        'username' => $_SERVER['HTTP_X_USERNAME'],
-                        'password' => $_SERVER['HTTP_X_PASSWORD']
-                    )
-            );
-            Yii::app()->cache->delete($cacheKey);
+
             $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
             $response = new stdClass();
@@ -678,7 +671,7 @@ class ApiController extends Controller {
                 "Not a Valid Request."
                 );
             $helpdesk = new Helpdesk;
-            $response = $helpdesk->add($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+            $response = $helpdesk->add($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse);
             $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
             $response = new stdClass();
@@ -725,6 +718,15 @@ class ApiController extends Controller {
 
             if ($response->success == false)
                 throw new Exception("Unable to Logout");
+
+            $cacheKey = json_encode(
+                    array(
+                        'clientid' => $this->_clientid,
+                        'username' => $_SERVER['HTTP_X_USERNAME'],
+                        'password' => $_SERVER['HTTP_X_PASSWORD']
+                    )
+            );
+            Yii::app()->cache->delete($cacheKey);
 
             //send response to client
             $response = new stdClass();

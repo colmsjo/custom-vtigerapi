@@ -121,8 +121,6 @@ class UserDetail extends CApplicationComponent {
 
     public function UpdatePassword($sessionName, $vtresturl, $clientid) {
         if ($_GET['action'] == 'reset') {
-
-
             //Receive response from vtiger REST service
             //Return response to client  
             $rest = new RESTClient();
@@ -219,7 +217,8 @@ class UserDetail extends CApplicationComponent {
         $response = $rest->get(
                 $vtresturl . "?$params"
         );
-        print_r($response);die;
+        print_r($response);
+        die;
         if ($response == '' || $response == null)
             throw new Exception(
             "Blank response received from " .
@@ -237,7 +236,5 @@ class UserDetail extends CApplicationComponent {
 
         return $response;
     }
-
-    
 
 }
