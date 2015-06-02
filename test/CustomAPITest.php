@@ -638,7 +638,7 @@ URL;
         $model = 'HelpDesk';
 
          //Skip the test 
-        $this->markTestSkipped('');
+        //$this->markTestSkipped('');
         //Label the test
         echo " Creating Trouble Ticket With Out Document" . PHP_EOL;
 
@@ -668,9 +668,11 @@ URL;
             $this->_setHeader($username, $password, $params, $signature);
 
             //Show the response
+            
             echo " Response: " . $response = $this->_rest->post(
             $this->_url . $model, $fields
             );
+            
             $response = json_decode($response);
 
             //check if response is valid

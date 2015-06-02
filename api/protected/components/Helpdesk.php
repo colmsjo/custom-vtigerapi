@@ -430,7 +430,7 @@ class Helpdesk extends CApplicationComponent {
     }
 
     public function add($sessionName, $vtresturl, $clientid, $session) {
-        
+
 
         /**
          * Validations
@@ -467,29 +467,25 @@ class Helpdesk extends CApplicationComponent {
                 $post[$keyToReplace] = $v;
             }
         }
-        
-        print_r($session);die;
+        $session->result->vtigerUserId = '19x' . $session->result->vtigerUserId;
         //get data json 
         $dataJson = json_encode(
                 array_merge(
                         $post, array(
             'parent_id' => $session->contactId,
-            'assigned_user_id' => $session->result->vtiger_user_id,
+            'assigned_user_id' => $session->result->vtigerUserId,
             'ticketstatus' => (isset($post['ticketstatus']) && !empty($post['ticketstatus'])) ? $post['ticketstatus'] : 'Closed',
                         )
                 )
         );
-        throw new Exception(
-            $dataJson, 1002
-            );
-        echo $dataJson;die;
+        //print_r($dataJson);die;
         //Receive response from vtiger REST service
         //Return response to client  
         $rest = new RESTClient();
 
         $rest->format('json');
         $response = $rest->post(
-                $this->_vtresturl, array(
+                $vtresturl, array(
             'sessionName' => $sessionName,
             'operation' => 'create',
             'element' => $dataJson,
@@ -497,7 +493,7 @@ class Helpdesk extends CApplicationComponent {
                 )
         );
 
-
+        //echo $response;die;
         if ($response == '' | $response == null)
             throw new Exception(
             'Blank response received from vtiger: Creating TT'
@@ -521,7 +517,6 @@ class Helpdesk extends CApplicationComponent {
         $response->message = "Processing the request, you will be notified by mail on successfull completion";
         $response->result = $globalresponse->result;
 
-        print_r($response);die;
         echo json_encode($response);
 
         // get the size of the output
@@ -553,7 +548,7 @@ class Helpdesk extends CApplicationComponent {
 
         $dataJson = array(
             'notes_title' => 'Attachement',
-            'assigned_user_id' => $this->_session->userId,
+            'assigned_user_id' => $session->result->vtigerUserId,
             'notecontent' => 'Attachement',
             'filelocationtype' => 'I',
             'filedownloadcount' => null,
@@ -601,8 +596,8 @@ class Helpdesk extends CApplicationComponent {
 
                     $rest->format('json');
                     $document = $rest->post(
-                            $this->_vtresturl, array(
-                        'sessionName' => $this->_session->sessionName,
+                            $vtresturl, array(
+                        'sessionName' => $sessionName,
                         'operation' => 'create',
                         'element' =>
                         json_encode($dataJson),
@@ -617,8 +612,8 @@ class Helpdesk extends CApplicationComponent {
                         $rest = new RESTClient();
                         $rest->format('json');
                         $response = $rest->post(
-                                $this->_vtresturl, array(
-                            'sessionName' => $this->_session->sessionName,
+                                $vtresturl, array(
+                            'sessionName' => $sessionName,
                             'operation' =>
                             'relatetroubleticketdocument',
                             'crmid' => $crmid,
@@ -672,125 +667,87 @@ class Helpdesk extends CApplicationComponent {
                 //unset($customFields[$keyToReplace]);
             }
         }
+        /*
+          if ($post['ticketstatus'] != 'Closed') {
+          $email = new AmazonSES();
+          //$email->set_region(constant("AmazonSES::" .
+          //Yii::app()->params->awsSESRegion));
 
-        if ($post['ticketstatus'] != 'Closed') {
-            $email = new AmazonSES();
-            //$email->set_region(constant("AmazonSES::" . 
-            //Yii::app()->params->awsSESRegion));
+          if ($globalresponse['result']['drivercauseddamage'] == 'Yes')
+          $globalresponse['result']['drivercauseddamage'] == 'Ja';
 
-            if ($globalresponse['result']['drivercauseddamage'] == 'Yes')
-                $globalresponse['result']['drivercauseddamage'] == 'Ja';
+          if ($globalresponse['result']['drivercauseddamage'] == 'No')
+          $globalresponse['result']['drivercauseddamage'] == 'Nej';
 
-            if ($globalresponse['result']['drivercauseddamage'] == 'No')
-                $globalresponse['result']['drivercauseddamage'] == 'Nej';
+          $sesBody = 'Hej ' . $this->_session->contactname .
+          ', ' . PHP_EOL .
+          PHP_EOL .
+          'En skaderapport har skapats.' . PHP_EOL .
+          PHP_EOL .
+          'Datum och tid: ' . date("Y-m-d H:i") . PHP_EOL .
+          'Ticket ID: ' .
+          $globalresponse['result']['ticket_no'] . PHP_EOL .
+          PHP_EOL .
+          '- Besiktningsuppgifter -' . PHP_EOL .
+          'Trailer ID: ' .
+          $globalresponse['result']['trailerid'] . PHP_EOL .
+          'Plats: ' .
+          $globalresponse['result']['damagereportlocation'] .
+          PHP_EOL .
+          'Plomerad: ' . $globalresponse['result']['sealed'] .
+          PHP_EOL;
 
-            $sesBody = 'Hej ' . $this->_session->contactname .
-                    ', ' . PHP_EOL .
-                    PHP_EOL .
-                    'En skaderapport har skapats.' . PHP_EOL .
-                    PHP_EOL .
-                    'Datum och tid: ' . date("Y-m-d H:i") . PHP_EOL .
-                    'Ticket ID: ' .
-                    $globalresponse['result']['ticket_no'] . PHP_EOL .
-                    PHP_EOL .
-                    '- Besiktningsuppgifter -' . PHP_EOL .
-                    'Trailer ID: ' .
-                    $globalresponse['result']['trailerid'] . PHP_EOL .
-                    'Plats: ' .
-                    $globalresponse['result']['damagereportlocation'] .
-                    PHP_EOL .
-                    'Plomerad: ' . $globalresponse['result']['sealed'] .
-                    PHP_EOL;
+          if ($globalresponse['result']['sealed'] == 'No' ||
+          $globalresponse['result']['sealed'] == 'Nej')
+          $sesBody .= 'Skivor: ' .
+          $globalresponse['result']['plates'] . PHP_EOL .
+          'Spännband: ' . $globalresponse['result']['straps'] .
+          PHP_EOL;
 
-            if ($globalresponse['result']['sealed'] == 'No' ||
-                    $globalresponse['result']['sealed'] == 'Nej')
-                $sesBody .= 'Skivor: ' .
-                        $globalresponse['result']['plates'] . PHP_EOL .
-                        'Spännband: ' . $globalresponse['result']['straps'] .
-                        PHP_EOL;
+          $sesBody .= PHP_EOL .
+          '- Skadeuppgifter -' . PHP_EOL .
+          'skadetyp: ' . $globalresponse['result']['damagetype'] .
+          PHP_EOL .
+          'Position: ' . $globalresponse['result']['damageposition'] .
+          PHP_EOL .
+          'Skada orsakad av chaufför: ' .
+          $globalresponse['result']['drivercauseddamage'] . PHP_EOL .
+          PHP_EOL .
+          PHP_EOL .
+          '--' .
+          PHP_EOL .
+          'Gizur Admin';
 
-            $sesBody .= PHP_EOL .
-                    '- Skadeuppgifter -' . PHP_EOL .
-                    'skadetyp: ' . $globalresponse['result']['damagetype'] .
-                    PHP_EOL .
-                    'Position: ' . $globalresponse['result']['damageposition'] .
-                    PHP_EOL .
-                    'Skada orsakad av chaufför: ' .
-                    $globalresponse['result']['drivercauseddamage'] . PHP_EOL .
-                    PHP_EOL .
-                    PHP_EOL .
-                    '--' .
-                    PHP_EOL .
-                    'Gizur Admin';
-
-            if ($clientid == 'clab') {
-                $sesResponse = $email->send_email(
-                        Yii::app()->params->awsSESFromEmailAddress, array(
-                    'ToAddresses' => array(// Destination (aka To)
-                        $_SERVER['HTTP_X_USERNAME']
-                    )
-                        ), array(// sesMessage (short form)
-                    'Subject.Data' => date("F j, Y") .
-                    ': Besiktningsprotokoll för  ' .
-                    $globalresponse['result']['ticket_no'],
-                    'Body.Text.Data' => $sesBody
-                        )
-                );
-            } else {
-                $sesResponse = $email->send_email(
-                        Yii::app()->params->awsSESFromEmailAddress, array(
-                    'ToAddresses' => array(// Destination (aka To)
-                        $_SERVER['HTTP_X_USERNAME']
-                    )
-                        ), array(// sesMessage (short form)
-                    'Subject.Data' => date("F j, Y") .
-                    ': Besiktningsprotokoll för  ' .
-                    $globalresponse['result']['ticket_no'],
-                    'Body.Text.Data' => $sesBody
-                        )
-                );
-            }
-        }
-
-        // Log
-        Yii::log(
-                " TRACE(" . $this->_traceId . "); " .
-                " FUNCTION(" . __FUNCTION__ . "); " .
-                " DOCUMENT CREATE STARTED BY MOBILE(UPDATE DYNAMODB SAVE): " .
-                ")", CLogger::LEVEL_TRACE
-        );
-
-        //Save result to DynamoDB
-        $dynamodb = new AmazonDynamoDB();
-        $dynamodb->set_region(
-                constant(
-                        "AmazonDynamoDB::" .
-                        Yii::app()->params->awsDynamoDBRegion
-                )
-        );
-
-        $ddbResponse = $dynamodb->put_item(
-                array(
-                    'TableName' => Yii::app()->params->awsErrorDynamoDBTableName,
-                    'Item' => $dynamodb->attributes(array(
-                        "id" => uniqid(''),
-                        "username" => $_SERVER['HTTP_X_USERNAME'],
-                        //"data" => json_encode($globalresponse),
-                        "ticket_no" => $globalresponse['result']['ticket_no'],
-                        "clientid" => $clientid,
-                        "message" => json_encode($globalresponse['result']['message']),
-                        "datetime" => strtotime("now")
-                    ))
-                )
-        );
-
-        // Log
-        Yii::log(
-                " TRACE(" . $this->_traceId . "); " .
-                " FUNCTION(" . __FUNCTION__ . "); " .
-                " DYNAMODB UPDATED: " . json_encode($ddbResponse) .
-                ")", CLogger::LEVEL_TRACE
-        );
+          if ($clientid == 'clab') {
+          $sesResponse = $email->send_email(
+          Yii::app()->params->awsSESFromEmailAddress, array(
+          'ToAddresses' => array(// Destination (aka To)
+          $_SERVER['HTTP_X_USERNAME']
+          )
+          ), array(// sesMessage (short form)
+          'Subject.Data' => date("F j, Y") .
+          ': Besiktningsprotokoll för  ' .
+          $globalresponse['result']['ticket_no'],
+          'Body.Text.Data' => $sesBody
+          )
+          );
+          } else {
+          $sesResponse = $email->send_email(
+          Yii::app()->params->awsSESFromEmailAddress, array(
+          'ToAddresses' => array(// Destination (aka To)
+          $_SERVER['HTTP_X_USERNAME']
+          )
+          ), array(// sesMessage (short form)
+          'Subject.Data' => date("F j, Y") .
+          ': Besiktningsprotokoll för  ' .
+          $globalresponse['result']['ticket_no'],
+          'Body.Text.Data' => $sesBody
+          )
+          );
+          }
+          }
+         * 
+         */
     }
 
 }

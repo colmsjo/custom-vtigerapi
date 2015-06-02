@@ -132,7 +132,7 @@ class ApiController extends Controller {
                 $response->accountname = $account['accountname'];
                 $response->account_no = $account['account_no'];
                 $response->timeZone = $timeZone;
-                $response->vtigerUserId = $vtigerUserId;
+                $response->vtigerUserId = '19x'.$vtigerUserId;
 //print_r($response);die;
                 /*
                  *  Session 
