@@ -5,7 +5,7 @@ Start thr vtiger and beservices.
 
 Everything is setup by the script `setup.sh` that is executed when the container is built.
 
-Start apache: `/start.sh`
+Install php unit : `/setup.sh`
 
 Run the tests: `./vendor/bin/phpunit CustomAPITest.php`. 
 
