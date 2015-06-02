@@ -87,7 +87,7 @@ class ApiController extends Controller {
 
     public function actionLogin() {
         try {
-            $cacheresponse = $this->checkloginusingcache();
+            $cacheresponse = 0;//$this->checkloginusingcache();
             if (!$cacheresponse) {
                 $rest = new RESTClient();
                 $rest->format('json');

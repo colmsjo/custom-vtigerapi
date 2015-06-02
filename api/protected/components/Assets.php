@@ -200,6 +200,7 @@ class Assets extends CApplicationComponent {
 
         //echo $vtresturl . "?$params";die;
         $rest->format('json');
+        echo ($sessionName);
         $response = $rest->get(
                 $vtresturl . "?$params"
         );

@@ -11,7 +11,7 @@ class Custom_API_Test extends PHPUnit_Framework_TestCase {
     private $_rest;
     private $_credentials = Array();
     private $_url = <<<URL
-"http://localhost/gizur/api/"
+"http://localhost/api/"
 URL;
 
     /**
