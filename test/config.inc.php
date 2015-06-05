@@ -6,7 +6,7 @@ class configuration
     public function get()
     {
         return array(
-            'url' => 'http://localhost/gizur/api/',
+            'url' => 'http://localhost/api/',
             'GIZURCLOUD_API_KEY' => 'GZCLD51A309109FD3551A309109FE26',
             'GIZURCLOUD_SECRET_KEY' => "51a309109fca42.1554128151a309109fcb20.84498075",
             'API_VERSION' => '0.1',
