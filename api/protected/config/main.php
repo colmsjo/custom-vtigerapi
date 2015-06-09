@@ -67,7 +67,7 @@ return array(
             'class' => 'CMemCache',
             'servers' => array(
                 array(
-                    'host' => '172.17.0.2',
+                    'host' => getenv('memcached_server'),
                     'port' => 11211,
                     'weight' => 100,
                 ),
@@ -100,7 +100,7 @@ return array(
     'params' => array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
-        'vtRestUrl' => 'http://172.17.0.3/vtigercrm/webservice.php',
+        'vtRestUrl' => 'http://vtiger/vtigercrm/webservice.php',
         'clab_custom_fields' => Array(
             'HelpDesk' => Array(
                 'tickettype' => 'cf_649',
