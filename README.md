@@ -14,15 +14,19 @@ Setup
 -----------------
 
 Clone this repo into a [LAMP container](https://github.com/colmsjo/docker-lamp).
-See the README of the LAMP container for instructions.
+See the README of the LAMP container for instructions. Setup the environment
+using `env.list` in supervisor (`/etc/supervisor/conf.d/supervisord.conf `)
+and also in the current session (`set -a; . env.list`). Don't forget to do
+`supervisorctl update`. Check http://[IP]:[PORT]/info.php for the environment
+variables.
 
 
 Update main.config
 ------------------
 
-* Change mem cache server detail
+* Change memcache server detail
 * Change vTiger api path
-* Change Post fix Server Configuration
+* Change Postfix Server Configuration
 
 
 Send request using curl
