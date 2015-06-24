@@ -678,27 +678,40 @@ class ApiController extends Controller {
             $params = "sessionName={$cacheresponse->sessionName}" .
                     "&operation=gettroubleticketdocumentfile" .
                     "&notesid=" . $_GET['id'];
+<<<<<<< HEAD
 
+=======
+>>>>>>> noos
              
             //Receive response from vtiger REST service
             //Return response to client  
             $rest = new RESTClient();
+<<<<<<< HEAD
 
+=======
+>>>>>>> noos
             $rest->format('json');
             $response = $rest->get(
                     $this->_vtresturl . "?$params"
             );
             
             $response = json_decode($response);
+<<<<<<< HEAD
 
+=======
+>>>>>>> noos
             if (!isset($_GET['path']) || $_GET['path'] == 0) {
                 $sThree = new AmazonS3();
                 $sThree->set_region(
                         constant("AmazonS3::" . Yii::app()->params->awsS3Region)
                 );
+<<<<<<< HEAD
 
                 $uniqueId = uniqid();
 
+=======
+                $uniqueId = uniqid();
+>>>>>>> noos
                 $fileResource = fopen(
                         'protected/data/' . $uniqueId .
                         $response->result->filename, 'x'
@@ -711,7 +724,10 @@ class ApiController extends Controller {
                 );
                 if (!$sThreeResponse->isOK())
                     throw new Exception("File not found.");
+<<<<<<< HEAD
 
+=======
+>>>>>>> noos
                 
                 
                 
@@ -724,7 +740,10 @@ class ApiController extends Controller {
                 unlink(
                         'protected/data/' . $uniqueId . $response->result->filename
                 );
+<<<<<<< HEAD
 
+=======
+>>>>>>> noos
                 $filenameSanitizer = explode("_", $response->result->filename);
                 unset($filenameSanitizer[0]);
                 unset($filenameSanitizer[1]);
