@@ -55,11 +55,7 @@ return array(
                 array('api/ViewCategoryHelpdesk', 'pattern' => '/<model:(HelpDesk)>/<category:(inoperation|damaged|all)>', 'verb' => 'GET'),
                 array('api/ViewCategoryHelpdesk', 'pattern' => '/<model:(HelpDesk)>/<minLimit:\w+>/<maxLimit:\w+>/<category:(inoperation|damaged|all)>/<year:\d{4}>/<month:\d{2}>/<trailerid:\w+>/<reportdamage:(yes|no|all)>/<ticketstatus:\w+>', 'verb' => 'GET'),
                 array('api/ViewHelpdesk', 'pattern' => '/<model:(HelpDesk)>/<id:[0-9x]+>', 'verb' => 'GET'),
-<<<<<<< HEAD
-                array('api/ViewImages', 'pattern' => '/<model:(DocumentAttachments)>/<id:[0-9x]+>/<path:(1|0)>', 'verb' => 'GET'),
-=======
 		array('api/ViewImages', 'pattern' => '/<model:(DocumentAttachments)>/<id:[0-9x]+>/<path:(1|0)>', 'verb' => 'GET'),
->>>>>>> noos
                 array('api/ViewImages', 'pattern' => '/<model:(DocumentAttachments)>/<id:[0-9x]+>', 'verb' => 'GET'),
                 array('api/DamageStatus', 'pattern' => '/<model:(HelpDesk)>/<fieldname:\w+>', 'verb' => 'GET'),
                 array('api/DamageUpdateStatus', 'pattern' => '/<model:(HelpDesk)>/<id:[0-9x]+>', 'verb' => 'PUT'),
@@ -72,7 +68,7 @@ return array(
             'class' => 'CMemCache',
             'servers' => array(
                 array(
-                    'host' => '172.17.0.2',
+                    'host' => beservices,
                     'port' => 11211,
                     'weight' => 100,
                 ),
@@ -105,19 +101,11 @@ return array(
     'params' => array(
         // this is used in contact page
         'adminEmail' => 'webmaster@example.com',
-<<<<<<< HEAD
-        'vtRestUrl' => 'http://172.17.0.3/vtigercrm/webservice.php',
-        'awsS3Bucket' => 'gizurcloud-clab',
-        'awsS3BucketUrl' => 'http://gizurcloud-clab.s3-website-eu-west-1.amazonaws.com',
-        'awsS3BackupBucket' => 'gc1-backups',
-        'awsS3Region' => 'REGION_EU_W1',
-=======
         'vtRestUrl' => 'http://localhost/vtigercrm/webservice.php',
 	'awsS3Bucket' => 'gizurcloud-clab',
         'awsS3BucketUrl' => 'http://gizurcloud-clab.s3-website-eu-west-1.amazonaws.com',
         'awsS3BackupBucket' => 'gc1-backups',
         'awsS3Region' => 'REGION_EU_W1',	
->>>>>>> noos
         'clab_custom_fields' => Array(
             'HelpDesk' => Array(
                 'tickettype' => 'cf_649',
