@@ -75,7 +75,13 @@ return array(
             ),
         ),
         // database settings are configured in database.php
-        'db' => require(dirname(__FILE__) . '/database.php'),
+        'db'=>array(
+                        'connectionString' =>'mysql:host=gc1-mysql1.cjd3zjo5ldy$jo5ldyz.eu-west-1.rds.amazonaws.com;dbname=clabgizurcom',
+                        'emulatePrepare' => true,
+                        'username' => 'clabgizurcom',
+                        'password' => 'il2xiTtjKG30',
+                        'charset' => 'utf8',
+                 ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'api/error',

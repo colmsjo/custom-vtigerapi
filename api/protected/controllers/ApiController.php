@@ -667,6 +667,32 @@ class ApiController extends Controller {
         }
     }
 
+    public function actionExistingDamages() {
+        
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $helpdesk = new Helpdesk;
+            $response = $helpdesk->ExistingDamages($this->_clientid);
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+    }
+
     public function actionViewImages() {
         try {
             $cacheresponse = $this->getlogincache();
@@ -678,26 +704,32 @@ class ApiController extends Controller {
             $params = "sessionName={$cacheresponse->sessionName}" .
                     "&operation=gettroubleticketdocumentfile" .
                     "&notesid=" . $_GET['id'];
+
+
             //Receive response from vtiger REST service
             //Return response to client  
             $rest = new RESTClient();
+
             $rest->format('json');
             $response = $rest->get(
                     $this->_vtresturl . "?$params"
             );
-            
+
             $response = json_decode($response);
+
             if (!isset($_GET['path']) || $_GET['path'] == 0) {
                 $sThree = new AmazonS3();
                 $sThree->set_region(
                         constant("AmazonS3::" . Yii::app()->params->awsS3Region)
                 );
+
                 $uniqueId = uniqid();
+
                 $fileResource = fopen(
                         'protected/data/' . $uniqueId .
                         $response->result->filename, 'x'
                 );
-                
+
                 $sThreeResponse = $sThree->get_object(
                         Yii::app()->params->awsS3Bucket, $response->result->filename, array(
                     'fileDownload' => $fileResource
@@ -705,6 +737,10 @@ class ApiController extends Controller {
                 );
                 if (!$sThreeResponse->isOK())
                     throw new Exception("File not found.");
+
+
+
+
                 $response->result->filecontent = base64_encode(
                         file_get_contents(
                                 'protected/data/' . $uniqueId .
@@ -714,6 +750,7 @@ class ApiController extends Controller {
                 unlink(
                         'protected/data/' . $uniqueId . $response->result->filename
                 );
+
                 $filenameSanitizer = explode("_", $response->result->filename);
                 unset($filenameSanitizer[0]);
                 unset($filenameSanitizer[1]);
@@ -747,7 +784,7 @@ class ApiController extends Controller {
                 "Not a Valid Request."
                 );
             $helpdesk = new Helpdesk;
-            $response = $helpdesk->add($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse);
+            $response = $helpdesk->add($cacheresponse->contactId);
             $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
             $response = new stdClass();
