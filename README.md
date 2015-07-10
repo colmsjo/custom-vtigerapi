@@ -42,46 +42,50 @@ see [`test`](test/README.md)
 Send request using curl
 -------------------------
 
+0. Prepare credentials:
+  username=<portal username>
+  password=<portal password>
+
 1. Login Request
-  curl -X POST http://localhost/api/Authenticate/login
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X POST http://localhost/api/Authenticate/login \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
 
 2. Assets List Request
-  curl -X GET http://localhost/api/Assets
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X GET http://localhost/api/Assets \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
 
 3. For trailer app portal: to get all damages we not use custom and vtiger api, For same we use direct mysql connection.
 
 
 4. For Assets tab
-  curl -X GET http://localhost/api/Assets/Search/s?searchString=''
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X GET http://localhost/api/Assets/Search/s?searchString='' \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
 
 5. Get All Account
-  curl -X GET http://localhost/api/Accounts
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X GET http://localhost/api/Accounts \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
 
 6. Get All Products
-  curl -X GET http://localhost/api/Products
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X GET http://localhost/api/Products \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
 
 7. Get Pick list
-  curl -X GET http://localhost/api/Assets/trailertype
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X GET http://localhost/api/Assets/trailertype \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
 
 8. Get All Products
-  curl -X GET http://localhost/api/Assets/trailertype
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X GET http://localhost/api/Assets/trailertype \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
 
 9. Create new Assets
-  curl -X POST http://localhost/api/Assets
-  -H "Content-Type:application/json" -H "X-USERNAME:<username>"
-  -H "X-PASSWORD:123456" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  curl -X POST http://localhost/api/Assets \
+  -H "Content-Type:application/json" -H "X-USERNAME:$username" \
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
   -D data
