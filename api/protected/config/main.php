@@ -68,7 +68,7 @@ return array(
             'class' => 'CMemCache',
             'servers' => array(
                 array(
-                    'host' => beservices,
+                    'host' => 'beservices',
                     'port' => 11211,
                     'weight' => 100,
                 ),
