@@ -33,6 +33,12 @@ Update main.config
 * Change Postfix Server Configuration
 
 
+Tests
+----
+
+see [`test`](test/README.md)
+
+
 Send request using curl
 -------------------------
 
