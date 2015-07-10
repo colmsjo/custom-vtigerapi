@@ -68,7 +68,7 @@ return array(
             'class' => 'CMemCache',
             'servers' => array(
                 array(
-                    'host' => 'beservices',
+                    'host' => getenv('memcached_server'),
                     'port' => 11211,
                     'weight' => 100,
                 ),
@@ -76,11 +76,11 @@ return array(
         ),
         // database settings are configured in database.php
        'db'=>array(
-          'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-          'emulatePrepare' => true,
-          'username' => 'root',
-          'password' => '',
-          'charset' => 'utf8',
+         'connectionString' =>'mysql:host='. getenv('db_server') . ';dbname=' . getenv('db_name'),
+         'emulatePrepare' => true,
+         'username' => getenv('db_username'),
+         'password' => getenv('db_password'),
+         'charset' => 'utf8',
           ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
@@ -111,7 +111,7 @@ return array(
 	'awsS3Bucket' => 'gizurcloud-clab',
         'awsS3BucketUrl' => 'http://gizurcloud-clab.s3-website-eu-west-1.amazonaws.com',
         'awsS3BackupBucket' => 'gc1-backups',
-        'awsS3Region' => 'REGION_EU_W1',	
+        'awsS3Region' => 'REGION_EU_W1',
         'clab_custom_fields' => Array(
             'HelpDesk' => Array(
                 'tickettype' => 'cf_649',
