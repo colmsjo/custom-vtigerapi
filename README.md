@@ -87,5 +87,5 @@ Send request using curl
 9. Create new Assets
   curl -X POST http://localhost/api/Assets \
   -H "Content-Type:application/json" -H "X-USERNAME:$username" \
-  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json"
+  -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json" \
   -D data
