@@ -204,7 +204,7 @@ class Assets extends CApplicationComponent {
         $response = $rest->get(
                 $vtresturl . "?$params"
         );
-        print_r($response);
+      //  print_r($response);
        // die;
         $response = json_decode($response, true);
 
