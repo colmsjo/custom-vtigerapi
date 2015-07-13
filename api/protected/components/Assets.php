@@ -200,12 +200,12 @@ class Assets extends CApplicationComponent {
 
         //echo $vtresturl . "?$params";die;
         $rest->format('json');
-        echo ($sessionName);
+       // echo ($sessionName);
         $response = $rest->get(
                 $vtresturl . "?$params"
         );
         print_r($response);
-        die;
+       // die;
         $response = json_decode($response, true);
 
         if ($response['success'] == false)
@@ -396,7 +396,7 @@ class Assets extends CApplicationComponent {
                                 )
                         )
                 );
-                print_r($dataJson);die;
+             //   print_r($dataJson);die;
                 //Receive response from vtiger REST service
                 //Return response to client  
                 $rest = new RESTClient();

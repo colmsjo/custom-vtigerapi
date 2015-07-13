@@ -54,7 +54,7 @@ CFCredentials::set(array(
 
 		// Amazon Web Services Key. Found in the AWS Security Credentials. You can also pass
 		// this value as the first parameter to a service constructor.
-		'key' => '',
+		'key' => getenv('aws_key'),
 
 		// Amazon Web Services Secret Key. Found in the AWS Security Credentials. You can also
 		// pass this value as the second parameter to a service constructor.
@@ -65,7 +65,7 @@ CFCredentials::set(array(
 		//
 		// Valid values are: `apc`, `xcache`, or a file system path such as `./cache` or
 		// `/tmp/cache/`.
-		'default_cache_config' => '',
+		'default_cache_config' => getenv('aws_secret'),
 
 		// Determines which Cerificate Authority file to use.
 		//

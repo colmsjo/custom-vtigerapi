@@ -217,8 +217,8 @@ class UserDetail extends CApplicationComponent {
         $response = $rest->get(
                 $vtresturl . "?$params"
         );
-        print_r($response);
-        die;
+      //  print_r($response);
+       // die;
         if ($response == '' || $response == null)
             throw new Exception(
             "Blank response received from " .
