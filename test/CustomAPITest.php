@@ -649,6 +649,7 @@ URL;
             'sealed' => 'Yes',
             'plates' => '3',
             'straps' => '2',
+            'damagereportlocation'=>'',
             'damagetype' => 'Aggregatkåpa',
             'damageposition' => 'Vänster sida (Left side)',
             'ticketstatus' => 'Open',
