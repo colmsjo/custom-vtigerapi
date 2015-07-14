@@ -58,14 +58,14 @@ CFCredentials::set(array(
 
 		// Amazon Web Services Secret Key. Found in the AWS Security Credentials. You can also
 		// pass this value as the second parameter to a service constructor.
-		'secret' => '',
+		'secret' => getenv('aws_secret'),
 
 		// This option allows you to configure a preferred storage type to use for caching by
 		// default. This can be changed later using the set_cache_config() method.
 		//
 		// Valid values are: `apc`, `xcache`, or a file system path such as `./cache` or
 		// `/tmp/cache/`.
-		'default_cache_config' => getenv('aws_secret'),
+		'default_cache_config' => '',
 
 		// Determines which Cerificate Authority file to use.
 		//
