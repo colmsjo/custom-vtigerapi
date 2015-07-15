@@ -42,6 +42,7 @@ see [`test`](test/README.md)
 Send request using curl
 -------------------------
 
+```
 0. Prepare credentials:
   username=<portal username>
   password=<portal password>
@@ -89,3 +90,4 @@ Send request using curl
   -H "Content-Type:application/json" -H "X-USERNAME:$username" \
   -H "X-PASSWORD:$password" -H "X-CLIENTID:clab" -H "ACCEPT-LANGUAGE:en" -H "ACCEPT:json" \
   -D data
+```

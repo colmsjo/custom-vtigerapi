@@ -13,6 +13,27 @@ This SQL statement shows user ids etc.: `SELECT * FROM clab.vtiger_portalinfo`
 Test results
 ------------
 
+150710, Fixed config error for database, down to 2 erros:
+
+```
+There were 2 failures:
+
+1) Custom_API_Test::testGetTroubleTicketFromId
+Checking validity of response
+Failed asserting that true matches expected false.
+
+/apps/custom-vtigerapi/test/CustomAPITest.php:508
+
+2) Custom_API_Test::testCreateTroubleTicketWithOutDocument
+Failed asserting that null is an instance of class "stdClass".
+
+/apps/custom-vtigerapi/test/CustomAPITest.php:686
+
+FAILURES!
+Tests: 11, Assertions: 23, Failures: 2, Skipped: 2.
+```
+
+
 150710, The tests have 4 failures (should of course have been fixed...):
 
 ```
