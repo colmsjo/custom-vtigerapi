@@ -747,14 +747,14 @@ class ApiController extends Controller {
                                 $response->result->filename
                         )
                 );
-                unlink(
-                        'protected/data/' . $uniqueId . $response->result->filename
-                );
+           //     unlink(
+         //               'protected/data/' . $uniqueId . $response->result->filename
+            //    );
 
-                $filenameSanitizer = explode("_", $response->result->filename);
-                unset($filenameSanitizer[0]);
-                unset($filenameSanitizer[1]);
-                $response->result->filename = implode('_', $filenameSanitizer);
+             //   $filenameSanitizer = explode("_", $response->result->filename);
+             //   unset($filenameSanitizer[0]);
+             //   unset($filenameSanitizer[1]);
+             //   $response->result->filename = implode('_', $filenameSanitizer);
             } else {
                 $response->result->filecontent = $_SERVER['HTTP_X_FORWARDED_PROTO'] . '://' . $_SERVER['HTTP_HOST'] . "/api/Images/" . $response->result->filename;
             }
