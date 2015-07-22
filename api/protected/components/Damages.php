@@ -189,8 +189,8 @@ class Damages extends CApplicationComponent {
 
         $retrivedObject[$customFields['damagestatus']] = $_PUT['damagestatus'];
         $retrivedObject[$customFields['notes']] = $_PUT['notes'];
-         $retrivedObject[$customFields['description1']] = $_PUT['damagestatus'];
-        $retrivedObject[$customFields['description2']] = $_PUT['notes'];
+         $retrivedObject[$customFields['description1']] = $_PUT['ticketdetails'];
+        $retrivedObject[$customFields['description2']] = $_PUT['ticketdetails1'];
 
         $response = $rest->post(
                 $vtresturl, array(
