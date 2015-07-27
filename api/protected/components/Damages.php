@@ -178,10 +178,10 @@ class Damages extends CApplicationComponent {
         $_PUT = Array();
         parse_str(file_get_contents('php://input'), $_PUT);
 
-$query="Update vtiger_ticketcf set cf_666='".$_PUT['ticketdetails']."', cf_667='".$_PUT['ticketdetails1']."' where ticketid = '".$_PUT['id']."' ";
-$connection = Yii::app()->db;
-$command = $connection->createCommand($query);
-$dataReader = $command->execute();
+//$query="Update vtiger_ticketcf set cf_666='".$_PUT['ticketdetails']."', cf_667='".$_PUT['ticketdetails1']."' where ticketid = '".$_PUT['id']."' ";
+//$connection = Yii::app()->db;
+//$command = $connection->createCommand($query);
+//$dataReader = $command->execute();
 
 
         $customFields = Yii::app()->params[$clientid .
@@ -189,6 +189,8 @@ $dataReader = $command->execute();
 
         $retrivedObject[$customFields['damagestatus']] = $_PUT['damagestatus'];
         $retrivedObject[$customFields['notes']] = $_PUT['notes'];
+         $retrivedObject[$customFields['description1']] = $_PUT['ticketdetails'];
+        $retrivedObject[$customFields['description2']] = $_PUT['ticketdetails1'];
 
         $response = $rest->post(
                 $vtresturl, array(

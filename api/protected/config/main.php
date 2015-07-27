@@ -125,6 +125,8 @@ return array(
                 'damageposition' => 'cf_658',
                 'drivercauseddamage' => 'cf_657',
                 'notes' => 'cf_664',
+                'description1' => 'cf_666',
+                'description2' => 'cf_667',
                 'damagestatus' => 'cf_665'
             ),
             'Assets' => Array(
