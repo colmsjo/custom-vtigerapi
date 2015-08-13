@@ -654,7 +654,7 @@ URL;
             'damageposition' => 'Vänster sida (Left side)',
             'ticketstatus' => 'Open',
             'reportdamage' => 'Yes',
-            'trailerid' => 'ASVVSD001'
+            'trailerid' => 'XXXTEST'
         );
 
         // Generate signature
