@@ -176,8 +176,7 @@ class Assets extends CApplicationComponent {
     }
 
     public function assetslist($sessionName, $vtresturl, $clientid) {
-
-        if (isset($_GET['actionType'])) {
+ if (isset($_GET['actionType'])) {
             if ($_GET['actionType'] == 'search') {
                 $searchData = $_GET['searchString'];
                 if ($searchData == 'None') {
@@ -186,35 +185,69 @@ class Assets extends CApplicationComponent {
                     $query = "select * from " . $_GET['model'] .
                             " where " . base64_decode($searchData) . " ;";
                 }
-            } else {
-                throw new Exception("Action search not found!");
-            }
-        } else {
-            $query = "select * from " . $_GET['model'] . ";";
-        }
+
         $queryParam = urlencode($query);
         $params = "sessionName={$sessionName}" .
                 "&operation=query&query=$queryParam";
+
         $rest = new RESTClient();
-
-
-        //echo $vtresturl . "?$params";die;
         $rest->format('json');
-       // echo ($sessionName);
+       
         $response = $rest->get(
                 $vtresturl . "?$params"
         );
-      //  print_r($response);
-       // die;
-        $response = json_decode($response, true);
+       
+	$response = json_decode($response, true);
 
-        if ($response['success'] == false)
-            throw new Exception('Unable to fetch details');
 
+            } else {
+                throw new Exception("Action search not found!");
+            }
+          	} else {
+                  $query = "select count(*) from " . $_GET['model'] . " ;";
+                  $queryParam = urlencode($query);
+                 $params = "sessionName={$sessionName}" .
+                         "&operation=query&query=$queryParam";
+
+                $rest = new RESTClient();
+
+        $rest->format('json');
+
+        $response = $rest->get(
+                $vtresturl . "?$params"
+        );
+      
+	$response = json_decode($response, true);
+        $count = ceil($response['result'][0]['count']/100);
+        $i=0;
+$result = array();
+ while($i<($count*100)){
+                $query = "select * from " . $_GET['model'] . " limit " .$i .  ",".($i+100).";";
+                 $queryParam = urlencode($query);
+                 $params = "sessionName={$sessionName}" .
+                         "&operation=query&query=$queryParam";
+
+                $rest = new RESTClient();
+
+                 $rest->format('json');
+
+                $response = $rest->get(
+                        $vtresturl . "?$params"
+                );
+     
+             	$response = json_decode($response, true);
+                $result =array_merge($response['result'],$result);
+                            	$i=$i+100;
+
+        }
+
+	$response['result'] = $result;
+        }
+     
         $customFields = Yii::app()->params[$clientid .
                 '_custom_fields']['Assets'];
         foreach ($response['result'] as &$asset) {
-            unset($asset['update_log']);
+unset($asset['update_log']);
             unset($asset['hours']);
             unset($asset['days']);
             unset($asset['modifiedtime']);
@@ -226,12 +259,13 @@ class Assets extends CApplicationComponent {
                 if ($keyToReplace) {
                     unset($asset[$fieldname]);
                     $asset[$keyToReplace] = $value;
-//unset($customFields[$keyToReplace]);
+
                 }
             }
-        }
+	}
 
-        return $response;
+	return $response;
+     
     }
 
     public function productList($sessionName, $vtresturl) {
