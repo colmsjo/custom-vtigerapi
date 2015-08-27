@@ -17,38 +17,55 @@ class Assets extends CApplicationComponent {
 
         if (isset($_GET['category'])) {
             if ($_GET['category'] == 'inoperation') {
-                $query = "select * from " . $_GET['model'] .
+               $query = "select count(*) from " . $_GET['model'] .
                         " where assetstatus = 'In Service';";
-            } else {
+ $queryParam = urlencode($query);
+$params = "sessionName={$sessionName}" .
+"&operation=query&query=$queryParam";
+$rest = new RESTClient();
+$rest->format('json');
+$response = $rest->get(
+$vtresturl . "?$params"
+);
+$response = json_decode($response, true);
+$count = ceil($response['result'][0]['count']/100);
+$i=0;
+
+$result = array();
+while($i<($count*100)){
+ $query = "select * from " . $_GET['model'] ." where assetstatus = 'In Service' order by assetname " . " limit " .$i . ",".($i+100).";";
+$queryParam = urlencode($query);
+$params = "sessionName={$sessionName}" .
+"&operation=query&query=$queryParam";
+$rest = new RESTClient();
+$rest->format('json');
+$response = $rest->get(
+$vtresturl . "?$params"
+);
+$response = json_decode($response, true);
+//print_r($response); die;
+$result =array_merge($response['result'],$result);
+$i=$i+100;
+}
+foreach($result as &$ma)
+    $tmp[] = &$ma["assetname"];
+array_multisort($tmp, $result);
+//print_r($result); die;
+$response['result'] = $result;
+
+
+        } else {
                 $query = "select * from " . $_GET['model'] .
                         " where assetstatus = 'Out-of-service';";
-            }
-        } else {
-            $query = "select * from " . $_GET['model'] . ";";
-        }
-
-        //urlencode to as its sent over http.
-        $queryParam = urlencode($query);
-        //$queryParam = $query;
-
-        //creating query string
-        $params = "sessionName={$sessionName}" .
+ $queryParam = urlencode($query);
+             $params = "sessionName={$sessionName}" .
                 "&operation=query&query=$queryParam";
-       
-
-        //Receive response from vtiger REST service
-        //Return response to client  
-        $rest = new RESTClient();
-
-        $rest->format('json');
-       
-        //echo  $vtresturl . "?$params";die;
-        $response = $rest->get(
+                 $rest = new RESTClient();
+$rest->format('json');
+         $response = $rest->get(
                 $vtresturl . "?$params"
-        );
-
-
-        if ($response == '' || $response == null)
+         );
+	if ($response == '' || $response == null)
             throw new Exception(
             "Blank response received from " .
             "vtiger: Get Asset List"
@@ -56,16 +73,39 @@ class Assets extends CApplicationComponent {
 
         //Objectify the response and check its success
         $response = json_decode($response,true);
-        
-        
+
+            }
+	} else {
+            $query = "select * from " . $_GET['model'] . ";";
+             $queryParam = urlencode($query);
+             $params = "sessionName={$sessionName}" .
+                "&operation=query&query=$queryParam";
+      $rest = new RESTClient();
+
+        $rest->format('json');
+         $response = $rest->get(
+                $vtresturl . "?$params"
+         );
+	if ($response == '' || $response == null)
+            throw new Exception(
+            "Blank response received from " .
+            "vtiger: Get Asset List"
+            );
+
+        //Objectify the response and check its success
+        $response = json_decode($response,true);
+
+        }
+
         if ($response['success'] == false)
-            throw new Exception('Unable to fetch details');
+ throw new Exception('Unable to fetch details');
 
         $customFields = Yii::app()->params[$clientid .
                 '_custom_fields']['Assets'];
 
-        //Before sending response santise custom fields names to 
-        //human readable field names                
+        //Before sending response santise custom fields names to
+        //human readable field names
+//print_r($response['result']); die;
         foreach ($response['result'] as &$asset) {
             unset($asset['update_log']);
             unset($asset['hours']);
@@ -76,16 +116,18 @@ class Assets extends CApplicationComponent {
                 $keyToReplace = array_search(
                         $fieldname, $customFields
                 );
-                if ($keyToReplace) {
+ if ($keyToReplace) {
                     unset($asset[$fieldname]);
                     $asset[$keyToReplace] = $value;
                     //unset($customFields[$keyToReplace]);
                 }
             }
+
         }
 
         return $response;
-    }
+    
+  }
 
     public function pickuplist($sessionName, $vtresturl, $clientid) {
 
