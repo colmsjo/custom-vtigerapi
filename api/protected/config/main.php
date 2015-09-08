@@ -39,7 +39,7 @@ return array(
             'urlFormat' => 'path',
             'rules' => array(
                 array('api/login', 'pattern' => '/<model:(Authenticate)>/<action:(login|logout)>', 'verb' => 'POST'),
-                array('api/UpdatePassword', 'pattern' => '/<model:(Authenticate)>/<action:(reset|changepw)>', 'verb' => 'PUT'),
+            
                 array('api/logout', 'pattern' => '/<model:(Authenticate)>/<action:(logout)>', 'verb' => 'POST'),
                 array('api/Assets', 'pattern' => '/<model:(Assets)>', 'verb' => 'GET'),
                 array('api/ViewCategoryAssets', 'pattern' => '/<model:(Assets)>/<category:(inoperation|damaged)>', 'verb' => 'GET'),
