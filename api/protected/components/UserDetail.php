@@ -120,6 +120,7 @@ class UserDetail extends CApplicationComponent {
     }
 
     public function UpdatePassword($sessionName, $vtresturl, $clientid) {
+       
         if ($_GET['action'] == 'reset') {
             //Receive response from vtiger REST service
             //Return response to client  
@@ -134,7 +135,7 @@ class UserDetail extends CApplicationComponent {
             );
 
             $response = json_decode($response);
-
+            
             if ($response->success == false)
                 throw new Exception("Unable to reset password");
 
@@ -146,6 +147,8 @@ class UserDetail extends CApplicationComponent {
                         'password' => $response->result->oldpassword
                     )
             );
+           
+           return $response;
         }
         if ($_GET['action'] == 'changepw') {
             $_PUT = Array();

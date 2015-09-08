@@ -90,6 +90,123 @@ class ApiController extends Controller {
         return true;
     }
 
+	public function actionDeleteAssets() {
+       
+		  try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $assets = new Assets;
+             //print_r( $_GET);die;   
+            $response = $assets->delete($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+	
+            ob_start();
+            $this->_sendResponse(200, json_encode($response));
+            ob_flush();
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+	}
+      
+       public function actionCreateContacts() {
+          
+
+        try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $contact = new Contacts;
+            $response = $contact->AddContact($cacheresponse->sessionName, $this->_vtresturl,$this->_clientid, $cacheresponse->result->vtigerUserId);
+
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+
+
+           }
+
+        public function actionDeleteContacts() {
+       
+          try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $contact = new Contacts;
+            $response = $contact->DeleteContact($cacheresponse->sessionName, $this->_vtresturl);
+
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+        
+        }
+
+
+   	public function actionUpdateContacts() {
+          
+           try {
+            $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+            $contact = new Contacts;
+            $response = $contact->EditContact($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid,$cacheresponse->result->vtigerUserId);
+            
+            $this->_sendResponse(200, json_encode($response));
+        } catch (Exception $ex) {
+            $response = new stdClass();
+            $response->success = false;
+            $response->error = new stdClass();
+            $response->error->code = $this->_errors[$ex->getCode()];
+            $response->error->message = $ex->getMessage();
+            $response->error->trace_id = $this->_traceId;
+            $response->error->vtresponse = $this->_vtresponse;
+            ob_start();
+            $this->_sendResponse(403, json_encode($response));
+            ob_flush();
+        }
+           		
+        }
+
     public function actionLogin() {
         try {
             $cacheresponse = 0; //$this->checkloginusingcache();
@@ -517,7 +634,7 @@ class ApiController extends Controller {
     }
 
     public function actionUpdatePassword() {
-        try {
+        try{
             $cacheresponse = $this->getlogincache();
             $cacheresponse = json_decode($cacheresponse);
             if (!$cacheresponse)
@@ -600,6 +717,7 @@ class ApiController extends Controller {
                 "Not a Valid Request."
                 );
             $contact = new Contacts;
+            
             $response = $contact->Contactlist($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
 
             $this->_sendResponse(200, json_encode($response));

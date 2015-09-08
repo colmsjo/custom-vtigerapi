@@ -16,8 +16,18 @@ class Contacts extends CApplicationComponent {
 
         /** Creating Assets* */
         $post = $_POST;
-       
-       
+        $customFields = array_flip(
+                Yii::app()->params[$clientid .
+                '_custom_fields']['Contacts']
+        );
+
+        foreach ($post as $k => $v) {
+            $keyToReplace = array_search($k, $customFields);
+            if ($keyToReplace) {
+                unset($post[$k]);
+                $post[$keyToReplace] = $v;
+            }
+        }
         //get data json 
         $dataJson = json_encode(
                 array_merge(
@@ -48,7 +58,7 @@ class Contacts extends CApplicationComponent {
 
         //Objectify the response and check its success
         $response = json_decode($response, true);
-        
+
         if ($response['success'] == false)
             throw new Exception('Unable to save contacts');
 
@@ -56,17 +66,15 @@ class Contacts extends CApplicationComponent {
     }
 
     public function EditContact($sessionName, $vtresturl, $clientid, $userId) {
-      
         if (isset($_GET['action'])) {
             if ($_GET['action'] == 'update') {
-                
+
                 /**
                  * Validations
                  */
                 $_PUT = Array();
                 parse_str(file_get_contents('php://input'), $_PUT);
                 $_POST = $_PUT;
-              // print_r($_POST);die;
                 $scriptStarted = date("c");
                 if (!isset($_POST['lastname']) || empty($_POST['lastname']))
                     throw new Exception("last name does not have a value", 1001);
@@ -77,10 +85,20 @@ class Contacts extends CApplicationComponent {
                 if (!isset($_POST['account_id']) || empty($_POST['account_id']))
                     throw new Exception("account does not have a value", 1001);
                 /** Updating Assets* */
-               
                 $post = $_POST;
-               
-               
+                $customFields = array_flip(
+                        Yii::app()->params[$clientid .
+                        '_custom_fields']['Contacts']
+                );
+
+                foreach ($post as $k => $v) {
+                    $keyToReplace = array_search($k, $customFields);
+                    if ($keyToReplace) {
+                        unset($post[$k]);
+                        $post[$keyToReplace] = $v;
+                    }
+                }
+                //get data json 
                 $dataJson = json_encode(
                         array_merge(
                                 $post, array(
@@ -88,32 +106,36 @@ class Contacts extends CApplicationComponent {
                                 )
                         )
                 );
-                //get data json
-                 
-            ;
-                  
+                //get data json 
+                $dataJson = json_encode(
+                        array_merge(
+                                $post, array(
+                    'assigned_user_id' => $userId
+                                )
+                        )
+                );
+
                 //Receive response from vtiger REST service
                 //Return response to client  
                 $rest = new RESTClient();
                 $rest->format('json');
-             
                 $response = $rest->post(
-                        $vtresturl, array(
+                        $this->_vtresturl, array(
                     'sessionName' => $sessionName,
                     'operation' => 'update',
                     'element' => $dataJson
                         )
                 );
-               
+
                 if ($response == '' | $response == null)
                     throw new Exception(
                     'Blank response received from vtiger: Creating TT'
                     );
-               // $this->_vtresponse = $response;
+                $this->_vtresponse = $response;
 
                 //Objectify the response and check its success
-                 $response = json_decode($response, true);
-  //             print_r($response);die;
+                $response = json_decode($response, true);
+
                 if ($response['success'] == false)
                     throw new Exception('Unable to update contacts');
 
@@ -126,7 +148,6 @@ class Contacts extends CApplicationComponent {
 
     public function DeleteContact($sessionName, $vtresturl) {
         $id = $_GET['id'];
-       
         $rest = new RESTClient();
         $rest->format('json');
         $response = $rest->post(
@@ -143,10 +164,9 @@ class Contacts extends CApplicationComponent {
             "vtiger: Get Products List"
             );
         //Save vtiger response
-       // $this->_vtresponse = $response;
+        $this->_vtresponse = $response;
         //Objectify the response and check its success
         $response = json_decode($response, true);
-       
         if ($response['success'] == false)
             throw new Exception('Unable to delete contacts');
 
@@ -154,54 +174,47 @@ class Contacts extends CApplicationComponent {
     }
 
     public function Contactlist($sessionName, $vtresturl, $clientid) {
-     
+       
         if (isset($_GET['actionType'])) {
             if ($_GET['actionType'] == 'search') {
                 $searchData = $_GET['searchString'];
                 if ($searchData == 'None') {
-                    $query = "select count(*) from " . $_GET['model'] . " ;";
+                    $query = "select * from " . $_GET['model'] . " ;";
                 } else {
-                    $query = "select count(*) from " . $_GET['model'] .
+                    $query = "select * from " . $_GET['model'] .
                             " where " . base64_decode($searchData) . " ;";
                 }
- 	    } else {
+            } else {
                 throw new Exception("Action search not found!");
             }
 
-	    $queryParam = urlencode($query);
+            $queryParam = urlencode($query);
+
+
+
+            //creating query string
             $params = "sessionName={$sessionName}" .
-                           "&operation=query&query=$queryParam";
+                    "&operation=query&query=$queryParam";
+
+
             $rest = new RESTClient();
             $rest->format('json');
-            $response = $rest->get(
-                             $vtresturl . "?$params"
-                        );
-            $response = json_decode($response, true);
-            $count = ceil($response['result'][0]['count']/100);
-            $i=0;
-            $result = array();
-            while($i<($count*100)){
-			if ($searchData == 'None') {
-                    		$query = "select * from " . $_GET['model'] . " limit " .$i .  ",".($i+100)." ;";
-               		} else {
-                    		$query = "select * from " . $_GET['model'] .
-                            		" where " . base64_decode($searchData) . " limit " .$i .  ",".($i+100)." ;";
-                	}
-			$queryParam = urlencode($query);
-                        $params = "sessionName={$sessionName}" .
-                                 "&operation=query&query=$queryParam";
-                        $rest = new RESTClient();
-                        $rest->format('json');
-                        $response = $rest->get(
-                                           $vtresturl . "?$params"
-                                     );
-                        $response = json_decode($response, true);
-                        $result =array_merge($response['result'],$result);
-                        $i=$i+100;
-		}
-            $response['result'] = $result;
+            //echo $vtresturl . "?$params";die;
 
-            
+            $response = $rest->get(
+                    $vtresturl . "?$params"
+            );
+
+
+            if ($response == '' || $response == null)
+                throw new Exception(
+                "Blank response received from " .
+                "vtiger: Get Assets search List"
+                );
+
+
+            //Objectify the response and check its success
+            $response = json_decode($response, true);
 
             if ($response['success'] == false)
                 throw new Exception('Unable to fetch details');
@@ -227,69 +240,30 @@ class Contacts extends CApplicationComponent {
                     }
                 }
             }
-
         } else {
-           
-            if(!isset($_GET['id']) && empty($_GET['id'])){
-           	$query = "select count(*) from " . $_GET['model'] . ";";
-		             $queryParam = urlencode($query);
-		$queryParam = urlencode($query);
-                $params = "sessionName={$sessionName}" .
-                            "&operation=query&query=$queryParam";
 
-                $rest = new RESTClient();
-                $rest->format('json');
-                $response = $rest->get(
-                                 $vtresturl . "?$params"
-                            );
-                $response = json_decode($response, true);
-                $count = ceil($response['result'][0]['count']/100);
-                $i=0;
-		$result = array();
-		while($i<($count*100)){
-        	        $query = "select * from " . $_GET['model'] . " limit " .$i .  ",".($i+100).";";
-                        $queryParam = urlencode($query);
-                        $params = "sessionName={$sessionName}" .
-                        	  "&operation=query&query=$queryParam";
-                        $rest = new RESTClient();
-                        $rest->format('json');
-                        $response = $rest->get(
-                                          $vtresturl . "?$params"
-                                    );
-                        $response = json_decode($response, true);
-                        $result =array_merge($response['result'],$result);
-                        $i=$i+100;
-                }
-                $response['result'] = $result;
-     
-            } else if($_GET['id']!=''){
-     
-        	  $query = "select * from " . $_GET['model'] .
-                            " where id =" . $_GET['id'] . " ;";
-     		  $queryParam = urlencode($query);
+            $query = "select * from " . $_GET['model'] . ";";
+            $queryParam = urlencode($query);
 
-               	//creating query string
-            	$params = "sessionName={$sessionName}" .
+            //creating query string
+            $params = "sessionName={$sessionName}" .
                     "&operation=query&query=$queryParam";
 
 
-	            $rest = new RESTClient();
-        	    $rest->format('json');
-        	    $response = $rest->get(
-                    	$vtresturl . "?$params"
-            		);
+            $rest = new RESTClient();
+            $rest->format('json');
+            $response = $rest->get(
+                    $vtresturl . "?$params"
+            );
 
-	            if ($response == '' || $response == null)
-        	        throw new Exception(
-                		"Blank response received from " .
-               			 "vtiger: Get Contacts list"
-                	);
+            if ($response == '' || $response == null)
+                throw new Exception(
+                "Blank response received from " .
+                "vtiger: Get Contacts list"
+                );
 
-        	    //Objectify the response and check its success
-	            $response = json_decode($response, true);
-
-            	}
-	     	
+            //Objectify the response and check its success
+            $response = json_decode($response, true);
 
             if ($response['success'] == false)
                 throw new Exception('Unable to fetch details');

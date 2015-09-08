@@ -217,98 +217,136 @@ $rest->format('json');
         }
     }
 
-    public function assetslist($sessionName, $vtresturl, $clientid) {
- if (isset($_GET['actionType'])) {
-            if ($_GET['actionType'] == 'search') {
-                $searchData = $_GET['searchString'];
-                if ($searchData == 'None') {
-                    $query = "select * from " . $_GET['model'] . " ;";
-                } else {
-                    $query = "select * from " . $_GET['model'] .
-                            " where " . base64_decode($searchData) . " ;";
-                }
+	public function assetslist($sessionName, $vtresturl, $clientid) {
+		if (isset($_GET['actionType'])) {
+            		if ($_GET['actionType'] == 'search') {
+                		$searchData = $_GET['searchString'];
+				
+				if ($searchData == 'None') {
+                                        $query = "select count(*) from " . $_GET['model'] . " ;";
+                                } else {
+                                        $query = "select count(*) from " . $_GET['model'] .
+                                                " where " . base64_decode($searchData) . " ;";
+                                }
+	                        $queryParam = urlencode($query);
+        	                $params = "sessionName={$sessionName}" .
+                	                "&operation=query&query=$queryParam";
 
-        $queryParam = urlencode($query);
-        $params = "sessionName={$sessionName}" .
-                "&operation=query&query=$queryParam";
+                        	$rest = new RESTClient();
 
-        $rest = new RESTClient();
-        $rest->format('json');
+	                        $rest->format('json');
+
+        	                $response = $rest->get(
+                	                $vtresturl . "?$params"
+                       		 );
+
+	                        $response = json_decode($response, true);
+        	                $count = ceil($response['result'][0]['count']/100);
+                	        $i=0;
+				$result = array();
+                     		while($i<($count*100)){
+					if ($searchData == 'None') {
+						$query = "select * from " . $_GET['model'] . " limit " .$i .  ",".($i+100).";";
+                                	} else {
+						$query = "select * from " . $_GET['model'] .
+	                                               	" where " . base64_decode($searchData) . " limit " . $i . "," . ($i+100) . ";";
+					}
+					$queryParam = urlencode($query);
+        	                        $params = "sessionName={$sessionName}" .
+                	                 "&operation=query&query=$queryParam";
+                        	        $rest = new RESTClient();
+                                	$rest->format('json');
+
+	                                $response = $rest->get(
+        	                                $vtresturl . "?$params"
+                	                );
+                        	        $response = json_decode($response, true);
+                                	$result =array_merge($response['result'],$result);
+                        	        $i=$i+100;
+                	         }
+        	                $response['result'] = $result;
+	
+				/*
+        	        	if ($searchData == 'None') {
+                	    		$query = "select * from " . $_GET['model'] . " ;";
+                		} else {
+                    			$query = "select * from " . $_GET['model'] .
+                            			" where " . base64_decode($searchData) . " ;";
+                		}
+
+		       	 	$queryParam = urlencode($query);
+        			$params = "sessionName={$sessionName}" .
+               		 		"&operation=query&query=$queryParam";
+
+			        $rest = new RESTClient();
+		        	$rest->format('json');
+       	
+			        $response = $rest->get(
+        			        $vtresturl . "?$params"
+        			);
        
-        $response = $rest->get(
-                $vtresturl . "?$params"
-        );
-       
-	$response = json_decode($response, true);
-
-
-            } else {
-                throw new Exception("Action search not found!");
-            }
+				$response = json_decode($response, true);
+				*/
+	   		 } else {
+                		throw new Exception("Action search not found!");
+            		}
           	} else {
-                  $query = "select count(*) from " . $_GET['model'] . " ;";
-                  $queryParam = urlencode($query);
-                 $params = "sessionName={$sessionName}" .
-                         "&operation=query&query=$queryParam";
+               		$query = "select count(*) from " . $_GET['model'] . " ;";
+                	$queryParam = urlencode($query);
+                  	$params = "sessionName={$sessionName}" .
+                        	"&operation=query&query=$queryParam";
 
-                $rest = new RESTClient();
+                 	$rest = new RESTClient();
 
-        $rest->format('json');
+	        	$rest->format('json');
 
-        $response = $rest->get(
-                $vtresturl . "?$params"
-        );
+       			$response = $rest->get(
+                		$vtresturl . "?$params"
+       			);
       
-	$response = json_decode($response, true);
-        $count = ceil($response['result'][0]['count']/100);
-        $i=0;
-$result = array();
- while($i<($count*100)){
-                $query = "select * from " . $_GET['model'] . " limit " .$i .  ",".($i+100).";";
-                 $queryParam = urlencode($query);
-                 $params = "sessionName={$sessionName}" .
-                         "&operation=query&query=$queryParam";
+			$response = json_decode($response, true);
+       			$count = ceil($response['result'][0]['count']/100);
+       			$i=0;
+ 	    		$result = array();
+      			while($i<($count*100)){
+                		$query = "select * from " . $_GET['model'] . " limit " .$i .  ",".($i+100).";";
+                 		$queryParam = urlencode($query);
+                 		$params = "sessionName={$sessionName}" .
+                        	 "&operation=query&query=$queryParam";
+				$rest = new RESTClient();
+	               		$rest->format('json');
 
-                $rest = new RESTClient();
-
-                 $rest->format('json');
-
-                $response = $rest->get(
-                        $vtresturl . "?$params"
-                );
+		                $response = $rest->get(
+        		                $vtresturl . "?$params"
+                		);
+    				$response = json_decode($response, true);
+        	        	$result =array_merge($response['result'],$result);
+                        	$i=$i+100;
+			 }
+			$response['result'] = $result;
+        	}
      
-             	$response = json_decode($response, true);
-                $result =array_merge($response['result'],$result);
-                            	$i=$i+100;
-
-        }
-
-	$response['result'] = $result;
-        }
+      		 $customFields = Yii::app()->params[$clientid .
+                	'_custom_fields']['Assets'];
+        	foreach ($response['result'] as &$asset) {
+			unset($asset['update_log']);
+            		unset($asset['hours']);
+            		unset($asset['days']);
+            		unset($asset['modifiedtime']);
+            		unset($asset['from_portal']);
+            		foreach ($asset as $fieldname => $value) {
+                		$keyToReplace = array_search(
+                        		$fieldname, $customFields
+                		);
+                		if ($keyToReplace) {
+                    			unset($asset[$fieldname]);
+                    			$asset[$keyToReplace] = $value;
+	                	}
+        		}
+		}
+		return $response;
      
-        $customFields = Yii::app()->params[$clientid .
-                '_custom_fields']['Assets'];
-        foreach ($response['result'] as &$asset) {
-unset($asset['update_log']);
-            unset($asset['hours']);
-            unset($asset['days']);
-            unset($asset['modifiedtime']);
-            unset($asset['from_portal']);
-            foreach ($asset as $fieldname => $value) {
-                $keyToReplace = array_search(
-                        $fieldname, $customFields
-                );
-                if ($keyToReplace) {
-                    unset($asset[$fieldname]);
-                    $asset[$keyToReplace] = $value;
-
-                }
-            }
 	}
-
-	return $response;
-     
-    }
 
     public function productList($sessionName, $vtresturl) {
 
@@ -573,6 +611,7 @@ unset($asset['update_log']);
 
     public function delete($sessionName, $vtresturl, $clientid) {
         $id = $_GET['id'];
+	//echo "<pre>ggggggggggggggggg"; print_r($_REQUEST); die;
         $rest = new RESTClient();
         $rest->format('json');
         $response = $rest->post(
