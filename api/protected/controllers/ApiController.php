@@ -295,7 +295,8 @@ class ApiController extends Controller {
                 array(
                     'clientid' => $this->_clientid,
                     'username' => $_SERVER['HTTP_X_USERNAME'],
-                    'password' => $_SERVER['HTTP_X_PASSWORD']
+                    'password' => $_SERVER['HTTP_X_PASSWORD'],
+                    'serveraddr'=>$_SERVER['HTTP_X_SERVERADDR']
                 )
         );
         Yii::app()->cache->set($cacheKey, $cacheValue, 86000);
@@ -307,6 +308,7 @@ class ApiController extends Controller {
                     'clientid' => $this->_clientid,
                     'username' => $_SERVER['HTTP_X_USERNAME'],
                     'password' => $_SERVER['HTTP_X_PASSWORD']
+                    'serveraddr'=>$_SERVER['HTTP_X_SERVERADDR']
                 )
         );
         return Yii::app()->cache->get($cacheKey);
