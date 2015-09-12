@@ -689,4 +689,62 @@ URL;
         }
     }
 
+  public function testCreateTroubleTicketWithDocument() {
+        //Request Parameters
+        $method = 'POST';
+        $model = 'HelpDesk';
+
+         //Skip the test 
+        //$this->markTestSkipped('');
+        //Label the test
+        echo " Creating Trouble Ticket with Document" . PHP_EOL;
+
+        //set fields to to posted
+        $fields = array(
+            'ticket_title'=>'Testing Using PHPUnit with Image Upload',
+                'filename'=>'@'.getcwd().'/images/image-to-upload.png',
+                'ticket_title'=> 'Testing Using PHPUnit',
+                'drivercauseddamage'=>'No',
+                'sealed'=>'Yes',
+                'plates'=>'3',
+                'straps'=>'2',
+                'damagetype'=> 'Aggregatkåpa',
+                'damageposition' => 'Vänster sida (Left side)',
+                'ticketstatus' => 'Open',      
+                'reportdamage' => 'Yes',
+                'trailerid'=>'XXXTEST'         
+        );
+
+        // Generate signature
+        list($params, $signature) = $this->_generateSignature(
+                $method, $model, date("c"), uniqid()
+        );
+
+        //login using each credentials
+        foreach ($this->_credentials as $username => $password) {
+
+            //Set Header
+            $this->_setHeader($username, $password, $params, $signature);
+
+            //Show the response
+            
+            echo " Response: " . $response = $this->_rest->post(
+            $this->_url . $model, $fields
+            );
+            
+            $response = json_decode($response);
+
+            //check if response is valid
+            if (isset($response->success)) {
+                $message = '';
+                if (isset($response->error->message))
+                    $message = $response->error->message;
+
+                $this->assertEquals($response->success, true, $message);
+            } else {
+                $this->assertInstanceOf('stdClass', $response);
+            }
+        }
+    }
+
 }
