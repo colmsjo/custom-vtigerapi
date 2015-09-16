@@ -66,7 +66,8 @@ class ApiController extends Controller {
     );
 
     protected function beforeAction($action) {
-        try {
+        //die('ccc');
+	try {
             $this->_traceId = uniqid();
             $req = new ValidateRequest;
             $req->authenticate();
@@ -119,6 +120,419 @@ class ApiController extends Controller {
             ob_flush();
         }
 	}
+    public function actionDocument() {
+     
+                $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+            $userid='19x'.$cacheresponse->result->vtigerUserId;
+            if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+ 
+                    ob_start();
+
+                    $response = new stdClass();
+                    $response->success = true;
+                    $response->message = "Request received.";
+
+                    echo json_encode($response);
+
+                    // get the size of the output
+                    $size = ob_get_length();
+
+                    // send headers to tell the browser to close the connection
+                    header("Content-Length: $size");
+                    header('Connection: close');
+
+                    // flush all output
+                    ob_end_flush();
+                    ob_flush();
+                    flush();
+
+                    // close current session
+                    if (session_id())
+                        session_write_close();
+
+                    // Loop through all Files
+                    // Attach file to trouble ticket
+                    $crmid = $_GET['id'];
+                    $ticket_no = $_POST['ticket_no'];
+
+                    $globalresponse->result->documents = Array();
+                    $globalresponse->result->message = Array();
+
+                    $dataJson = array(
+                        'notes_title' => 'Attachement',
+                        'assigned_user_id' => $userid,
+                        'notecontent' => 'Attachement',
+                        'filelocationtype' => 'I',
+                        'filedownloadcount' => null,
+                        'filestatus' => 1,
+                        'fileversion' => ''
+                    );
+
+                    $globalresponse = new stdClass();
+
+                    foreach ($_FILES as $key => $file) {
+
+                        $uniqueid = uniqid();
+
+                        $dataJson['filename'] = $crmid . "_" . $uniqueid .
+                                "_" . $file['name'];
+                        $dataJson['filesize'] = $file['size'];
+                        $dataJson['filetype'] = $file['type'];
+
+                        
+                        // Upload file to Amazon S3
+                        $sThree = new AmazonS3();
+                        $sThree->set_region(
+                                constant("AmazonS3::" . Yii::app()->params->awsS3Region)
+                        );
+
+                        $response = $sThree->create_object(
+                                Yii::app()->params->awsS3Bucket, $crmid . '_' . $uniqueid . '_' . $file['name'], array(
+                            'fileUpload' => $file['tmp_name'],
+                            'contentType' => $file['type'],
+                            'headers' => array(
+                                'Cache-Control' => 'max-age',
+                                'Content-Language' => 'en-US',
+                                'Expires' =>
+                                'Thu, 01 Dec 1994 16:00:00 GMT',
+                            )
+                                )
+                        );
+
+                        if ($response->isOK()) {
+
+                            
+
+                            //Create document
+                            $rest = new RESTClient();
+
+                            $rest->format('json');
+                            $document = $rest->post(
+                                    $this->_vtresturl, array(
+                                'sessionName' => $cacheresponse->sessionName,
+                                'operation' => 'create',
+                                'element' =>
+                                json_encode($dataJson),
+                                'elementType' => 'Documents'
+                                    )
+                            );
+
+                            $document = json_decode($document);
+                            if ($document->success) {
+                                $notesid = $document->result->id;
+
+                              
+
+                                //Relate Document with Trouble Ticket
+                                $rest = new RESTClient();
+
+                                $rest->format('json');
+                                $response = $rest->post(
+                                        $this->_vtresturl, array(
+                                    'sessionName' => $cacheresponse->sessionName,
+                                    'operation' =>
+                                    'relatetroubleticketdocument',
+                                    'crmid' => $crmid,
+                                    'notesid' => $notesid
+                                        )
+                                );
+
+                              
+                                $response = json_decode($response);
+                                if ($response->success) {
+                                    $globalresponse->result->documents[] = $document->result;
+                                    $globalresponse->result->message[] = 'File ' .
+                                            ' (' . $file['name'] . ') updated.';
+                                } else {
+                                    $globalresponse->result->message[] = 'not' .
+                                            ' uploaded - relating ' .
+                                            'document failed:' . $file['name'];
+                                }
+                            } else {
+                                $globalresponse->result->message[] = 'not uploaded' .
+                                        ' - creating document failed:' . $file['name'];
+                            }
+                        } else {
+                            $globalresponse->result->message[] = 'not uploaded - ' .
+                                    'upload to storage service failed:' . $file['name'];
+                        }
+                    }
+
+                    $globalresponse = json_encode($globalresponse);
+                    $globalresponse = json_decode($globalresponse, true);
+
+                   
+
+    }
+
+   
+      public function actionCreateTroubleticket(){
+
+                   $cacheresponse = $this->getlogincache();
+            $cacheresponse = json_decode($cacheresponse);
+              $userid='19x'.$cacheresponse->result->vtigerUserId;
+        
+          if (!$cacheresponse)
+                throw new Exception(
+                "Not a Valid Request."
+                );
+                     if (!isset($_POST['ticketstatus']) || empty($_POST['ticketstatus']))
+                        throw new Exception("ticketstatus does not have a value", 1001);
+
+                    if (!isset($_POST['reportdamage']) || empty($_POST['reportdamage']))
+                        throw new Exception("reportdamage does not have a value", 1001);
+
+                    if (!isset($_POST['trailerid']) || empty($_POST['trailerid']))
+                        throw new Exception("trailerid does not have a value", 1001);
+
+                    if (!isset($_POST['ticket_title']) || empty($_POST['ticket_title']))
+                        throw new Exception("ticket_title does not have a value", 1001);
+
+                    if ($_POST['ticketstatus'] == 'Open' && $_POST['reportdamage'] == 'No')
+                        throw new Exception(
+                        "Ticket can be opened for damaged trailers only", 1002
+                        );
+
+                    /** Creating Touble Ticket* */
+                    $post = $_POST;
+               
+                    $customFields = array_flip(
+                            Yii::app()->params[$this->_clientid .
+                            '_custom_fields']['HelpDesk']
+                    );
+                 
+                    foreach ($post as $k => $v) {
+                        $keyToReplace = array_search($k, $customFields);
+                        if ($keyToReplace) {
+                            unset($post[$k]);
+                            $post[$keyToReplace] = $v;
+                        }
+                    }
+                 
+                
+                    //get data json 
+                    $dataJson = json_encode(
+                            array_merge(
+                                    $post, array(
+                        'parent_id' => $cacheresponse->contactId,
+                        'assigned_user_id' =>$userid,
+                        'ticketstatus' => (isset($post['ticketstatus']) && !empty($post['ticketstatus'])) ? $post['ticketstatus'] : 'Closed',
+                                    )
+                            )
+                    );
+
+               
+                    //Receive response from vtiger REST service
+                    //Return response to client  
+                    $rest = new RESTClient();
+                     $rest->format('json');
+                    $response = $rest->post(
+                            $this->_vtresturl, array(
+                        'sessionName' => $cacheresponse->sessionName,
+                        'operation' => 'create',
+                        'element' => $dataJson,
+                        'elementType' => $_GET['model']
+                            )
+                    );
+                   
+                  
+                    if ($response == '' | $response == null)
+                        throw new Exception(
+                        'Blank response received from vtiger: Creating TT'
+                        );
+
+                    $globalresponse = json_decode($response);
+                                 
+                    /**
+                     * The following section creates a response buffer
+                     * 
+                     */
+                    //Continue to run script even when the connection is over
+                    ignore_user_abort(true);
+                    set_time_limit(0);
+
+                    // buffer all upcoming output
+                    ob_start();
+
+                    $response = new stdClass();
+                    $response->success = true;
+                    $response->message = "Processing the request, you will be notified by mail on successfull completion";
+                    $response->result = $globalresponse->result;
+
+                    echo json_encode($response);
+
+                    // get the size of the output
+                    $size = ob_get_length();
+
+                    // send headers to tell the browser to close the connection
+                    header("Content-Length: $size");
+                    header('Connection: close');
+
+                    // flush all output
+                    ob_end_flush();
+                    ob_flush();
+                    flush();
+
+                    // close current session
+                    if (session_id())
+                        session_write_close();
+                    /*                     * Creating Document* */
+
+                    
+                          if ($globalresponse->success == false)
+                        throw new Exception($globalresponse->error->message);
+
+                    //Create Documents if any is attached
+                    $crmid = $globalresponse->result->id;
+             
+                    $globalresponse->result->documents = Array();
+                    $globalresponse->result->message = Array();
+
+                   
+                    $dataJson = array(
+                        'notes_title' => 'Attachement',
+                        'assigned_user_id' => $userid,
+                        'notecontent' => 'Attachement',
+                        'filelocationtype' => 'I',
+                        'filedownloadcount' => null,
+                        'filestatus' => 1,
+                        'fileversion' => '',
+                    );
+
+                    
+
+                    if (!empty($_FILES) && $globalresponse->success) {
+
+                       
+                        foreach ($_FILES as $key => $file) {
+                            $uniqueid = uniqid();
+
+                            $dataJson['filename'] = $crmid . "_" . $uniqueid .
+                                    "_" . $file['name'];
+                            $dataJson['filesize'] = $file['size'];
+                            $dataJson['filetype'] = $file['type'];
+
+                            
+                            //Upload file to Amazon S3
+                            $sThree = new AmazonS3();
+                            $sThree->set_region(
+                                    constant("AmazonS3::" . Yii::app()->params->awsS3Region)
+                            );
+
+                            $response = $sThree->create_object(
+                                    Yii::app()->params->awsS3Bucket, $crmid . '_' . $uniqueid . '_' . $file['name'], array(
+                                'fileUpload' => $file['tmp_name'],
+                                'contentType' => $file['type'],
+                                'headers' => array(
+                                    'Cache-Control' => 'max-age',
+                                    'Content-Language' => 'en-US',
+                                    'Expires' =>
+                                    'Thu, 01 Dec 1994 16:00:00 GMT',
+                                )
+                                    )
+                            );
+
+                            
+
+                            if ($response->isOK()) {
+
+
+                                //Create document
+                                $rest = new RESTClient();
+
+                                $rest->format('json');
+                                $document = $rest->post(
+                                        $this->_vtresturl, array(
+                                    'sessionName' => $cacheresponse->sessionName,
+                                    'operation' => 'create',
+                                    'element' =>
+                                    json_encode($dataJson),
+                                    'elementType' => 'Documents'
+                                        )
+                                );
+
+                               
+
+                                $document = json_decode($document);
+                                if ($document->success) {
+                                    $notesid = $document->result->id;
+
+                                   
+
+                                    //Relate Document with Trouble Ticket
+                                    $rest = new RESTClient();
+                                    $rest->format('json');
+                                    $response = $rest->post(
+                                            $this->_vtresturl, array(
+                                        'sessionName' => $cacheresponse->sessionName,
+                                        'operation' =>
+                                        'relatetroubleticketdocument',
+                                        'crmid' => $crmid,
+                                        'notesid' => $notesid
+                                            )
+                                    );
+
+                                   
+                                    $response = json_decode($response);
+                                    if ($response->success) {
+                                        $globalresponse->result->documents[] = $document->result;
+                                        $globalresponse->result->message[] = 'File' .
+                                                ' (' . $file['name'] . ') updated.';
+                                    } else {
+                                        $globalresponse->result->message[] = 'not' .
+                                                ' uploaded - relating ' .
+                                                'document failed:' . $file['name'];
+                                    }
+                                } else {
+                                    $globalresponse->result->message[] = 'not' .
+                                            ' uploaded - creating document failed:' .
+                                            $file['name'];
+                                }
+                            } else {
+                                $globalresponse->result->message[] = 'not' .
+                                        ' uploaded - upload to storage ' .
+                                        'service failed:' . $file['name'];
+                            }
+                        }
+                    }
+
+                   
+
+                    $globalresponse = json_encode($globalresponse);
+                    $globalresponse = json_decode($globalresponse, true);
+
+                    $customFields = Yii::app()->params[$this->_clientid .
+                            '_custom_fields']['HelpDesk'];
+
+
+                    unset($globalresponse['result']['update_log']);
+                    unset($globalresponse['result']['hours']);
+                    unset($globalresponse['result']['days']);
+                    unset($globalresponse['result']['modifiedtime']);
+                    unset($globalresponse['result']['from_portal']);
+                    unset($globalresponse['result']['documents']);
+
+                    foreach ($globalresponse['result'] as $fieldname => $value) {
+                        $keyToReplace = array_search($fieldname, $customFields);
+                        if ($keyToReplace) {
+                            unset($globalresponse['result'][$fieldname]);
+                            $globalresponse['result'][$keyToReplace] = $value;
+                            //unset($customFields[$keyToReplace]);
+                        }
+                    }
+
+                    
+                   
+                    
+
+
+}
+
+
       
        public function actionCreateContacts() {
           
@@ -262,6 +676,7 @@ class ApiController extends Controller {
                 $session = new stdClass();
                 $session->sessionName = $session_name;
                 $session->contactId = $contactId;
+		$response->vtigerUserId = $vtigerUserId;
                 $session->username = $username;
                 $session->result = $response;
                 $this->setlogincache(json_encode($session));
@@ -296,7 +711,7 @@ class ApiController extends Controller {
                     'clientid' => $this->_clientid,
                     'username' => $_SERVER['HTTP_X_USERNAME'],
                     'password' => $_SERVER['HTTP_X_PASSWORD']
-                   
+                    
                 )
         );
         Yii::app()->cache->set($cacheKey, $cacheValue, 86000);
@@ -894,9 +1309,14 @@ class ApiController extends Controller {
             ob_flush();
         }
     }
-
+	
+   public function actionupdate(){
+		die('prakash');
+	}
     public function actionCreateTicket() {
-        try {
+       //die(print_r($_FILES));     
+      
+       try {
             $cacheresponse = $this->getlogincache();
             $cacheresponse = json_decode($cacheresponse);
             if (!$cacheresponse)
@@ -904,7 +1324,8 @@ class ApiController extends Controller {
                 "Not a Valid Request."
                 );
             $helpdesk = new Helpdesk;
-            $response = $helpdesk->add($cacheresponse->contactId);
+        //    $response = $helpdesk->add($cacheresponse->contactId);
+	$response = $helpdesk->newadd($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid,$cacheresponse->contactId,$cacheresponse->vtigerUserId);
             $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
             $response = new stdClass();

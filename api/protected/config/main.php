@@ -35,7 +35,8 @@ return array(
             'allowAutoLogin' => true,
         ),
         // uncomment the following to enable URLs in path-format
-        'urlManager' => array(
+        
+	'urlManager' => array(
             'urlFormat' => 'path',
             'rules' => array(
                 array('api/login', 'pattern' => '/<model:(Authenticate)>/<action:(login|logout)>', 'verb' => 'POST'),
@@ -70,7 +71,8 @@ return array(
                 array('api/DamageStatus', 'pattern' => '/<model:(HelpDesk)>/<fieldname:\w+>', 'verb' => 'GET'),
                 array('api/DamageUpdateStatus', 'pattern' => '/<model:(HelpDesk)>/<id:[0-9x]+>', 'verb' => 'PUT'),
                 array('api/DamageUpdateStatusAndNotes', 'pattern' => '/<model:(HelpDesk)>/<action:(updatedamagenotes)>/<id:[0-9x]+>', 'verb' => 'PUT'),
-                array('api/CreateTicket', 'pattern' => '/<model:(HelpDesk)>', 'verb' => 'POST'),
+                array('api/CreateTroubleticket', 'pattern' => '/<model:(HelpDesk)>', 'verb' => 'POST'),
+               array('api/Document', 'pattern' => '/<model:(DocumentAttachment)>/<id:[0-9x]+>', 'verb' => 'POST'),  
                 array('api/UpdatePassword', 'pattern' => '/<model:(Authenticate)>/<action:(reset|changepw)>', 'verb' => 'PUT'),
             ),
         ),

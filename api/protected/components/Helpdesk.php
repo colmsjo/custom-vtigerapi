@@ -321,7 +321,6 @@ vtiger_senotesrel where crmid=" . $ticket['id'] . ")";
     }
 
     public function add($parentId) {
-
 //----------------------------
         $scriptStarted = date("c");
         if (!isset($_POST['ticketstatus']) || empty($_POST['ticketstatus']))
@@ -399,8 +398,18 @@ VALUES ($crmid,'$ticketno',NULL,'$parentId',0,'','','Open','','" . $_POST['ticke
             "Some Error in Database Connection", 1002
             );
         }
+	
+	$_FILES = array(
+            'test' => array(
+                'name' => 'test.jpg',
+                'type' => 'image/jpg',
+                'size' => 542,
+                'tmp_name' => '/apps/custom-vtigerapi/test/images/image-to-upload.jpg',
+                'error' => 0
+            )
+        );
         if (!empty($_FILES)) {
-            $notesid = $crmid;
+	    $notesid = $crmid;
 
             foreach ($_FILES as $key => $file) {
                 $uniqueid = uniqid();
@@ -410,42 +419,76 @@ VALUES ($crmid,'$ticketno',NULL,'$parentId',0,'','','Open','','" . $_POST['ticke
                 $sThree->set_region(
                         constant("AmazonS3::" . Yii::app()->params->awsS3Region)
                 );
-
+		
+		
                 $response = $sThree->create_object(
-                        Yii::app()->params->awsS3Bucket, $crmid . '_' . $uniqueid . '_' . $file['name'], array(
-                    'fileUpload' => $file['tmp_name'],
-                    'contentType' => $file['type'],
-                    'headers' => array(
-                        'Cache-Control' => 'max-age',
-                        'Content-Language' => 'en-US',
-                        'Expires' =>
-                        'Thu, 01 Dec 1994 16:00:00 GMT',
-                    )
+                        Yii::app()->params->awsS3Bucket, $crmid . '_' . $uniqueid . '_' . $file['name'], 
+			array(
+                    		'fileUpload' => $file['tmp_name'],
+                  	        'contentType' => $file['type'],
+                   		 'headers' => array(
+                       		 'Cache-Control' => 'max-age',
+                    	         'Content-Language' => 'en-US',
+                        	 'Expires' =>'Thu, 01 Dec 1994 16:00:00 GMT',
+                    		)
                         )
                 );
-
-
+	
                 if ($response->isOK()) {
-
+		    $crmid=$this->savecrmenties();
+			//echo $crmid;
                     $notesid = $notesid + 1;
-                    $query2 = " INSERT INTO `vtiger_senotesrel`(`crmid`, `notesid`) VALUES ($crmid,$notesid)";
-                    $con = Yii::app()->db;
-                    $com = $con->createCommand($query2);
-                    $res = $com->execute();
-
-
-                    $querydocument = " INSERT INTO `vtiger_notes`(`notesid`, `note_no`, `title`, `filename`, `notecontent`, `folderid`, `filetype`, `filelocationtype`, `filedownloadcount`, `filestatus`, `filesize`, `fileversion`) VALUES "
-                            . "($notesid,'','Attachement','" . $file['name'] . "','Attachement','1','" . $file['type'] . "','I',NULL,'" . $file['size'] . "','')";
-                    $con = Yii::app()->db;
+		    $querydocument = " INSERT INTO `vtiger_notes`(`notesid`, `note_no`, `title`, `filename`, `notecontent`, `folderid`, `filetype`, `filelocationtype`, `filedownloadcount`, `filestatus`, `filesize`, `fileversion`) VALUES "
+                            . "($notesid,'','Attachement','" . $file['name'] . "','Attachement','1','" . $file['type'] . "','0','I',NULL,'" . $file['size'] . "','')";
+	           // echo $querydocument;
+		    $con = Yii::app()->db;
                     $com = $con->createCommand($querydocument);
                     $result = $com->execute();
-                }
+
+                    $query2 = "INSERT INTO `vtiger_senotesrel`(`crmid`, `notesid`) VALUES ($crmid,$notesid)";
+              
+		    $con = Yii::app()->db;
+                    $com = $con->createCommand($query2);
+                    $res = $com->execute();
+              }
             }
         }
         $response = new stdClass();
         $response->success = true;
         $response->message = "Ticket Created Sucessfully.";
         return $response;
+    }
+
+    function savecrmenties()
+    {
+        $query = "UPDATE vtiger_crmentity_seq SET id = id +1";
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand($query);
+        $dataReader = $command->execute(); // execute a query SQL
+
+        if (!$dataReader) {
+            throw new Exception(
+            "Some Error in Database Connection", 1002
+            );
+        }
+        $query = "SELECT id FROM vtiger_crmentity_seq";
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand($query);
+        $dataReader = $command->query(); // execute a query SQL
+        $crmid = $dataReader->read();
+        $crmid = $crmid['id'];
+//------------------------------------------------------------
+        $query = "INSERT INTO vtiger_crmentity(crmid, smcreatorid, smownerid, modifiedby, setype, description, createdtime, modifiedtime, viewedtime, status, version, presence, deleted) 
+VALUES ($crmid,'1001','1001','1001','Documents',NULL,CURDATE(),CURDATE(),CURDATE(),NULL,'0','1','0')";
+
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand($query);
+        $result = $command->execute(); // execute a query SQL
+        if (!$result)
+            throw new Exception(
+            "Some Error in Database Connection", 1002
+            );
+        return $crmid;
     }
 
     public function ExistingDamages() {
@@ -546,5 +589,5 @@ vtiger_senotesrel where crmid=" . $ticket['id'] . ")";
             return $response;
         }
     }
-
 }
+
