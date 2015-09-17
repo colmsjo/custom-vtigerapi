@@ -66,7 +66,7 @@ class ApiController extends Controller {
     );
 
     protected function beforeAction($action) {
-        //die('ccc');
+//echo"<pre>";       die(print_r($_SERVER));
 	try {
             $this->_traceId = uniqid();
             $req = new ValidateRequest;
@@ -706,26 +706,58 @@ class ApiController extends Controller {
     }
 
     function setlogincache($cacheValue) {
+
+//echo"<pre>";       die(print_r($_SERVER));
+if($_SERVER['HTTP_HOST'] == 'localhost' ){
         $cacheKey = json_encode(
+                array(
+                    'clientid' => $this->_clientid,
+                    'username' => $_SERVER['HTTP_X_USERNAME'],
+                    'password' => $_SERVER['HTTP_X_PASSWORD'],
+                    'serveraddr'=>$_SERVER['HTTP_X_SERVERADDR']
+                    
+                )
+        );
+}else{
+
+ $cacheKey = json_encode(
                 array(
                     'clientid' => $this->_clientid,
                     'username' => $_SERVER['HTTP_X_USERNAME'],
                     'password' => $_SERVER['HTTP_X_PASSWORD']
                     
+
                 )
         );
+
+
+}
         Yii::app()->cache->set($cacheKey, $cacheValue, 86000);
     }
 
     function getlogincache() {
+
+if($_SERVER['HTTP_HOST'] == 'localhost' ){
         $cacheKey = json_encode(
                 array(
                     'clientid' => $this->_clientid,
                     'username' => $_SERVER['HTTP_X_USERNAME'],
-                    'password' => $_SERVER['HTTP_X_PASSWORD']
+                    'password' => $_SERVER['HTTP_X_PASSWORD'],
+                   'serveraddr'=>$_SERVER['HTTP_X_SERVERADDR']
                     
                 )
+        ); } else {
+
+ $cacheKey = json_encode(
+                array(
+                    'clientid' => $this->_clientid,
+                    'username' => $_SERVER['HTTP_X_USERNAME'],
+                    'password' => $_SERVER['HTTP_X_PASSWORD']
+                  
+
+                )
         );
+      }
         return Yii::app()->cache->get($cacheKey);
     }
 
