@@ -29,27 +29,29 @@ class ValidateRequest extends CApplicationComponent {
      * Authenticates a request.	 
      */
     public function authenticate() {
+      
+
         //First we validate the model
         if (!isset($_GET['model']))
             throw new Exception('Model not present');
 
         if (in_array($_GET['model'], $this->_validModels) === false)
             throw new Exception('Model not supported');
-
+         if($_GET['model'] != 'Authenticate' || $_GET['action'] != 'reset'){
         if (!isset($_SERVER['HTTP_X_USERNAME']))
             throw new Exception('Could not find enough credentials');
 
         //Check if the password is provided in the request
         if (!isset($_SERVER['HTTP_X_PASSWORD']))
             throw new Exception('Could not find enough credentials');
-
+      
 
         if (empty($_SERVER['HTTP_X_USERNAME']))
             throw new Exception("Credentials are invalid.", 2004);
 
         if (empty($_SERVER['HTTP_X_PASSWORD']))
             throw new Exception("Credentials are invalid.", 2004);
-
+}
 
         //Check Acceptable language of request
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))

@@ -3,7 +3,8 @@
 class Contacts extends CApplicationComponent {
 
     public function AddContact($sessionName, $vtresturl, $clientid, $userid) {
-        $scriptStarted = date("c");
+           $userid='19x'.$userid;
+          $scriptStarted = date("c");
 
         if (!isset($_POST['lastname']) || empty($_POST['lastname']))
             throw new Exception("last name does not have a value", 1001);
@@ -56,7 +57,8 @@ class Contacts extends CApplicationComponent {
     }
 
     public function EditContact($sessionName, $vtresturl, $clientid, $userId) {
-      
+      $userId='19x'.$userId;
+   
         if (isset($_GET['action'])) {
             if ($_GET['action'] == 'update') {
                 

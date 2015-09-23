@@ -18,6 +18,11 @@
  * */
 spl_autoload_unregister(array('YiiBase', 'autoload'));
 Yii::import('application.vendor.*');
+require("phpmailer/class.phpmailer.php");
+
+require("phpmailer/PHPMailerAutoload.php");
+
+
 require_once 'aws-php-sdk/sdk.class.php';
 spl_autoload_register(array('YiiBase', 'autoload'));
 
@@ -67,7 +72,7 @@ class ApiController extends Controller {
 
     protected function beforeAction($action) {
 //echo"<pre>";       die(print_r($_SERVER));
-	try {
+	try {  
             $this->_traceId = uniqid();
             $req = new ValidateRequest;
             $req->authenticate();
@@ -525,9 +530,94 @@ class ApiController extends Controller {
                         }
                     }
 
-                    
+            
                    
+                    if ($post['ticketstatus'] != 'Closed') {
+                         if ($globalresponse['result']['drivercauseddamage'] == 'Yes')
+                            $globalresponse['result']['drivercauseddamage'] == 'Ja';
+
+                        if ($globalresponse['result']['drivercauseddamage'] == 'No')
+                            $globalresponse['result']['drivercauseddamage'] == 'Nej';
+
+                        $sesBody = 'Hej ' . $cacheresponse->result->contactname .
+                                ', ' . PHP_EOL .
+                                PHP_EOL .
+                                'En skaderapport har skapats.' . PHP_EOL .
+                                PHP_EOL .
+                                'Datum och tid: ' . date("Y-m-d H:i") . PHP_EOL .
+                                'Ticket ID: ' .
+                                $globalresponse['result']['ticket_no'] . PHP_EOL .
+                                PHP_EOL .
+                                '- Besiktningsuppgifter -' . PHP_EOL .
+'Trailer ID: ' .
+                                $globalresponse['result']['trailerid'] . PHP_EOL .
+                                'Plats: ' .
+                                $globalresponse['result']['damagereportlocation'] .
+                                PHP_EOL .
+                                'Plomerad: ' . $globalresponse['result']['sealed'] .
+                                    PHP_EOL;
+
+ 
+                          if ($globalresponse['result']['sealed'] == 'No' ||
+                                $globalresponse['result']['sealed'] == 'Nej')
+                            $sesBody .= 'Skivor: ' .
+                                    $globalresponse['result']['plates'] . PHP_EOL .
+                                    'Spännband: ' . $globalresponse['result']['straps'] .
+                                    PHP_EOL;
+
+                        $sesBody .= PHP_EOL .
+'- Skadeuppgifter -' . PHP_EOL .
+                                'skadetyp: ' . $globalresponse['result']['damagetype'] .
+                                PHP_EOL .
+                                'Position: ' . $globalresponse['result']['damageposition'] .
+                                PHP_EOL .
+                                'Skada orsakad av chaufför: ' .
+                                $globalresponse['result']['drivercauseddamage'] . PHP_EOL .
+                                PHP_EOL .
+                                PHP_EOL .
+                                '--' .
+                                PHP_EOL .
+                                'Gizur Admin';
                     
+
+                         $mail = new PHPMailer;
+                        $mail->isSMTP(); // Set mailer to use SMTP
+                        $mail->Host = 'ssl://smtp.gmail.com'; // Specify main and backup SMTP servers
+                      
+                        $mail->SMTPAuth = true; // Enable SMTP authentication
+                        $mail->Username = 'noreply@gizur.com'; // SMTP username
+                        $mail->Password = 'MX2rFOPvwv1VEGAWSZ20kni2A/cNZ3V33gboTLu9cAg='; // SMTP password
+                       
+                        $mail->Port = 465; // TCP port to connect to
+                        $mail->From = 'noreply@gizur.com';
+                        $mail->FromName = 'Admin';
+                        $mail->addAddress('vivek.verma@essindia.com', 'Vivek'); // Add a recipient
+                        //$mail->addAddress('ellen@example.com'); // Name is optional
+                        //$mail->addReplyTo('info@example.com', 'Information');
+                        //$mail->addCC('cc@example.com');
+                        //$mail->addBCC('bcc@example.com');
+                        $mail->WordWrap = 50; // Set wod wrap to 50 characters
+                        //$mail->addAttachment('/var/tmp/file.tar.gz'); // Add attachments
+                        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg'); // Optional name
+                        $mail->isHTML(true); // Set email format to HTML
+                        $subject=date("F j, Y") .
+
+                           ': Besiktningsprotokoll för  ' .
+                                $globalresponse['result']['ticket_no'];
+                        $mail->Subject = $subject;
+                        $mail->Body =$sesBody;
+                       //die("Going to send mail");
+                //	$mail->AltBody = $alt_message;
+                        if(!$mail->send()) {
+                        //        die($mail->ErrorInfo);
+                        //      echo 'Message could not be sent.';
+                        //	echo 'Mailer Error: ' . $mail->ErrorInfo;
+                        } else {
+                          //     die("not done");
+                        //      echo 'Message has been sent';
+                                }
+                        }
+
 
 
 }
@@ -540,12 +630,13 @@ class ApiController extends Controller {
         try {
             $cacheresponse = $this->getlogincache();
             $cacheresponse = json_decode($cacheresponse);
+
             if (!$cacheresponse)
                 throw new Exception(
                 "Not a Valid Request."
                 );
             $contact = new Contacts;
-            $response = $contact->AddContact($cacheresponse->sessionName, $this->_vtresturl,$this->_clientid, $cacheresponse->result->vtigerUserId);
+$response = $contact->AddContact($cacheresponse->sessionName, $this->_vtresturl,$this->_clientid, $cacheresponse->result->vtigerUserId);
 
             $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
@@ -595,15 +686,17 @@ class ApiController extends Controller {
 
    	public function actionUpdateContacts() {
           
-           try {
+          try {
             $cacheresponse = $this->getlogincache();
             $cacheresponse = json_decode($cacheresponse);
+
+        
             if (!$cacheresponse)
                 throw new Exception(
                 "Not a Valid Request."
                 );
             $contact = new Contacts;
-            $response = $contact->EditContact($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid,$cacheresponse->result->vtigerUserId);
+ $response = $contact->EditContact($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse->result->vtigerUserId);
             
             $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
@@ -869,7 +962,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost' ){
                 );
 
             $assets = new Assets;
-            $response = $assets->create($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse->result->vtigerUserId);
+ $response = $assets->create($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse->result->vtigerUserId);
             ob_start();
             $this->_sendResponse(200, json_encode($response));
             ob_flush();
@@ -888,7 +981,8 @@ if($_SERVER['HTTP_HOST'] == 'localhost' ){
     }
 
     public function actionUpdateAssets() {
-        try {
+        try { 
+
             $cacheresponse = $this->getlogincache();
             $cacheresponse = json_decode($cacheresponse);
             if (!$cacheresponse)
@@ -897,7 +991,7 @@ if($_SERVER['HTTP_HOST'] == 'localhost' ){
                 );
 
             $assets = new Assets;
-            $response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse->result->vtigerUserId);
+$response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid, $cacheresponse->result->vtigerUserId);
             ob_start();
             $this->_sendResponse(200, json_encode($response));
             ob_flush();
@@ -1083,15 +1177,78 @@ if($_SERVER['HTTP_HOST'] == 'localhost' ){
     }
 
     public function actionUpdatePassword() {
-        try{
+      try {
+               if ($_GET['action'] != 'reset') {
+
             $cacheresponse = $this->getlogincache();
-            $cacheresponse = json_decode($cacheresponse);
+            $cacheresponse = json_decode($cacheresponse); 
             if (!$cacheresponse)
                 throw new Exception(
                 "Not a Valid Request."
-                );
-            $usr = new UserDetail;
-            $response = $usr->UpdatePassword($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+                );    }
+
+                
+           // $usr = new UserDetail;
+            //$response = $usr->UpdatePassword($cacheresponse->sessionName, $this->_vtresturl, $this->_clientid);
+              // $sessionName= $cacheresponse->sessionName ;
+               $vtresturl= $this->_vtresturl ;
+               $clientid= $this->_clientid ;
+                if ($_GET['action'] == 'reset') {
+              
+            //Receive response from vtiger REST service
+            //Return response to client
+            $rest = new RESTClient();
+                 
+	    $rest->format('json');
+            $response = $rest->post(
+                    $vtresturl, array(
+                'operation' => 'resetpassword',
+                'username' => $_SERVER['HTTP_X_USERNAME'],
+                    )
+            );
+            //print_r($response);die;
+            $response = json_decode($response);
+
+            if ($response->success == false)
+                throw new Exception("Unable to reset password");
+
+            //Create a cache key for saving session
+     // return $response;
+
+          
+        }                                                                               
+      if ($_GET['action'] == 'changepw') {
+                $sessionName= $cacheresponse->sessionName ;
+               $vtresturl= $this->_vtresturl ;
+               $clientid= $this->_clientid ;
+    
+            $_PUT = Array();
+            parse_str(file_get_contents('php://input'), $_PUT);
+            if (!isset($_PUT['newpassword']))
+                throw new Exception('New Password not provided.');
+
+            //Receive response from vtiger REST service
+            //Return response to client
+            $rest = new RESTClient();
+            $rest->format('json');
+            $response = $rest->post(
+                    $vtresturl, array(
+                'sessionName' => $sessionName,
+                'operation' => 'changepw',
+                'username' => $_SERVER['HTTP_X_USERNAME'],
+                'oldpassword' => $_SERVER['HTTP_X_PASSWORD'],
+                'newpassword' => $_PUT['newpassword']
+                    )
+            );
+ $response = json_decode($response);
+            if ($response->success == false)
+                throw new Exception($response->error->message);
+
+       
+        } 
+        
+
+
             $this->_sendResponse(200, json_encode($response));
         } catch (Exception $ex) {
             $response = new stdClass();

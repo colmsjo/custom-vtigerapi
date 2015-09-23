@@ -383,7 +383,8 @@ $rest->format('json');
     }
 
     public function create($sessionName, $vtresturl, $clientid, $userid) {
-        $scriptStarted = date("c");
+       $userid='19x'.$userid;  
+      $scriptStarted = date("c");
         if (!isset($_POST['assetname']) || empty($_POST['assetname']))
             throw new Exception("asset name does not have a value", 1001);
 
@@ -456,6 +457,9 @@ $rest->format('json');
     }
 
     public function edit($sessionName, $vtresturl, $clientid, $userId) {
+          $userId='19x'.$userId;
+            
+             
         if (isset($_GET['action'])) {
             if ($_GET['action'] == 'update') {
 

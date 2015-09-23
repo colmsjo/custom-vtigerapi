@@ -170,6 +170,7 @@ class UserDetail extends CApplicationComponent {
                     )
             );
             $response = json_decode($response);
+        
             if ($response->success == false)
                 throw new Exception($response->error->message);
 
