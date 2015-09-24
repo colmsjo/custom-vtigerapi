@@ -1198,7 +1198,7 @@ $response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this-
             //Receive response from vtiger REST service
             //Return response to client
             $rest = new RESTClient();
-                 
+          
 	    $rest->format('json');
             $response = $rest->post(
                     $vtresturl, array(
@@ -1211,6 +1211,52 @@ $response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this-
 
             if ($response->success == false)
                 throw new Exception("Unable to reset password");
+            $query = "select user_password from vtiger_portalinfo where user_name='".$_SERVER['HTTP_X_USERNAME']."';";
+
+                      $connection = Yii::app()->db;
+                      $command = $connection->createCommand($query);
+                      $dataReader = $command->query();
+                      $res['success'] = true;
+                      $res['result'] =$dataReader->readAll();
+
+
+                   $newpassword=$res['result'][0]['user_password'];
+                                          $sesBody ='Dear Gizur Account Holder, ' .
+                            PHP_EOL .
+                            PHP_EOL .
+                            'Your password has been reset to: ' .
+                            $newpassword .
+                            PHP_EOL .
+                            'Please change it the next time you login.' .
+                            PHP_EOL .
+                            PHP_EOL .
+                            '--' .
+                            PHP_EOL .
+                            ' Gizur Admin';
+                                
+                         $mail = new PHPMailer;
+                        $mail->isSMTP(); // Set mailer to use SMTP
+                        $mail->Host = 'ssl://smtp.gmail.com'; // Specify main and backup SMTP servers
+                        $mail->SMTPAuth = true; // Enable SMTP authentication
+                        $mail->Username = 'noreply@gizur.com'; // SMTP username
+                        $mail->Password = 'MX2rFOPvwv1VEGAWSZ20kni2A/cNZ3V33gboTLu9cAg='; // SMTP password
+
+                        $mail->Port = 465; // TCP port to connect to
+                        $mail->From = 'noreply@gizur.com';
+                        $mail->FromName = 'Admin';
+                        $mail->addAddress('vivek.verma@essindia.com', 'Vivek'); // Add a recipient
+                       
+                        $mail->WordWrap = 50; // Set wod wrap to 50 characters
+                       
+                        $mail->isHTML(true); // Set email format to HTML
+                        $subject='Your Gizur Account password has been reset';
+                        $mail->Subject = $subject;
+                        $mail->Body =$sesBody;
+                      
+                        $mail->send();
+                       
+                        
+
 
             //Create a cache key for saving session
      // return $response;
