@@ -24,8 +24,7 @@ URL;
      * 
      * @return string signature
      */
-    private function _generateSignature($method, $model, $timestamp, $uniqueSalt
-    ) {
+    private function _generateSignature($method, $model, $timestamp, $uniqueSalt) {
         //Build array
         $params = array(
             'Verb' => $method,
@@ -73,6 +72,9 @@ URL;
                 'X-GIZURCLOUD_API-KEY', $this->_gizurCloudApiKey
         );
         $this->_rest->set_header('X-UNIQUE-SALT', $params['UniqueSalt']);
+        $addr='172.17.0.1';
+        $this->_rest->set_header('X-SERVERADDR', $addr);
+
     }
 
     /**
@@ -689,7 +691,8 @@ URL;
         }
     }
 
-  public function testCreateTroubleTicketWithDocument() {
+  /*
+public function testCreateTroubleTicketWithDocument() {
         //Request Parameters
         $method = 'POST';
         $model = 'HelpDesk';
@@ -745,6 +748,6 @@ URL;
                 $this->assertInstanceOf('stdClass', $response);
             }
         }
-    }
+    } */
 
 }
