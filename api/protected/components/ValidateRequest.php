@@ -52,6 +52,7 @@ class ValidateRequest extends CApplicationComponent {
         if (empty($_SERVER['HTTP_X_PASSWORD']))
             throw new Exception("Credentials are invalid.", 2004);
 }
+$_SERVER['HTTP_ACCEPT_LANGUAGE']='en';
 
         //Check Acceptable language of request
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
