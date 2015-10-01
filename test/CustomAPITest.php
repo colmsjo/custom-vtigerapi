@@ -72,7 +72,7 @@ URL;
                 'X-GIZURCLOUD_API-KEY', $this->_gizurCloudApiKey
         );
         $this->_rest->set_header('X-UNIQUE-SALT', $params['UniqueSalt']);
-        $addr='172.17.0.1';
+        $addr='192.0.0.0';
         $this->_rest->set_header('X-SERVERADDR', $addr);
 
     }
