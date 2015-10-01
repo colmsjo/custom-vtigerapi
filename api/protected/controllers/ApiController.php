@@ -591,8 +591,9 @@ class ApiController extends Controller {
                         $mail->Port = 465; // TCP port to connect to
                         $mail->From = 'noreply@gizur.com';
                         $mail->FromName = 'Admin';
-                        $mail->addAddress('vivek.verma@essindia.com', 'Vivek'); // Add a recipient
-                        //$mail->addAddress('ellen@example.com'); // Name is optional
+                        //$mail->addAddress('vivek.verma@essindia.com', 'Vivek'); // Add a recipient
+                        $to=$_SERVER['HTTP_X_USERNAME'];
+                        $mail->addAddress($to); // Name is optional
                         //$mail->addReplyTo('info@example.com', 'Information');
                         //$mail->addCC('cc@example.com');
                         //$mail->addBCC('bcc@example.com');
@@ -1244,7 +1245,8 @@ $response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this-
                         $mail->Port = 465; // TCP port to connect to
                         $mail->From = 'noreply@gizur.com';
                         $mail->FromName = 'Admin';
-                        $mail->addAddress('vivek.verma@essindia.com', 'Vivek'); // Add a recipient
+                        	$to=$_SERVER['HTTP_X_USERNAME'];
+                        $mail->addAddress($to); // Add a recipient
                        
                         $mail->WordWrap = 50; // Set wod wrap to 50 characters
                        
