@@ -62,7 +62,10 @@ URL;
      * @return string signature
      */
     private function _setHeader($username, $password, $params, $signature) {
-   //     print_r($_SERVER);die;
+       // print_r($_SERVER);die;
+          $host= gethostname();
+         $ip = gethostbyname($host);
+//die($ip);
         $this->_rest->set_header('X-USERNAME', $username);
         $this->_rest->set_header('X-PASSWORD', $password);
         $this->_rest->set_header('X-TIMESTAMP', $params['Timestamp']);
@@ -73,10 +76,7 @@ URL;
                 'X-GIZURCLOUD_API-KEY', $this->_gizurCloudApiKey
         );
         $this->_rest->set_header('X-UNIQUE-SALT', $params['UniqueSalt']);
-       if($_SERVER['HOSTNAME'] == 'lampClab1'){	 $addr='192.0.0.0';
-     }else if($_SERVER['HOSTNAME'] == 'lampClab2'){
-$addr='192.0.0.1';
-}   $this->_rest->set_header('X-SERVERADDR', $addr);
+       $this->_rest->set_header('X-SERVERADDR', $ip);
 
     }
 
