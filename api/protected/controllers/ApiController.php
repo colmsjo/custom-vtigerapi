@@ -1288,7 +1288,9 @@ $response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this-
                 'newpassword' => $_PUT['newpassword']
                     )
             );
- $response = json_decode($response);
+     $_SERVER['HTTP_X_PASSWORD']=$_PUT['newpassword'];
+     $this->setlogincache();
+      $response = json_decode($response);
             if ($response->success == false)
                 throw new Exception($response->error->message);
 
