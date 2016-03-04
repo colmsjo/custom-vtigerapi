@@ -1662,7 +1662,7 @@ $response = $assets->edit($cacheresponse->sessionName, $this->_vtresturl, $this-
 
 // and the content type
         header('Content-type: ' . $contentType);
-        header('Access-Control-Allow-Origin: *');
+       // header('Access-Control-Allow-Origin: *');
 
 // pages with body are easy
         if ($body != '') {
